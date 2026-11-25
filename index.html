@@ -69,7 +69,7 @@
     width:100%;
     border-collapse:collapse;
     font-size:.86rem;
-    min-width:1040px;
+    min-width:1240px;
   }
   thead th{
     position:sticky;top:0;z-index:2;
@@ -143,9 +143,11 @@
           <th>Seniors' &amp; Women's</th>
           <th>Assistants'</th>
           <th>PGA of BC</th>
+          <th>Club Pro</th>
           <th>Events</th>
           <th>Participation</th>
           <th>Regional Tour</th>
+          <th>Tour Finish</th>
           <th>PGA of Canada</th>
           <th>Total</th>
         </tr>
@@ -156,449 +158,459 @@
   </div>
 
 <script>
-const DATA = `1|Swan, James|Olympic View Golf Club|0.00|20.00|28.25|2|8.00|10.00|4.00|70.25
-2|Stinson, Kevin|Cheam Mountain Golf Course|0.00|0.00|50.00|1|4.00|12.00|2.00|68.00
-3|Kennedy, Nicklaus|Talking Rock Golf Course|0.00|16.00|19.00|2|8.00|12.00|4.00|59.00
-4|Kallis, Carson|Burnaby Mountain Golf Club|0.00|35.00|1.00|2|8.00|12.00|2.00|58.00
-5|Zibrik, Dave|Point Grey Golf & Country Club|0.00|0.00|40.00|3|10.00|6.00|0.00|56.00
-6|Irwin, Jordan|Saratoga Beach Golf Course|0.00|25.00|12.25|2|8.00|10.00|0.00|55.25
-7|Towill, Justin|Harvest Golf Club|0.00|0.00|28.25|2|8.00|12.00|2.00|50.25
-8|Shin, John|Northview Golf & Country Club|0.00|10.00|19.00|2|8.00|12.00|0.00|49.00
-9|Bogdan, Luke|Ace Performance Centre|0.00|0.00|28.25|1|4.00|12.00|4.00|48.25
-9|Goodfellow, Aidan|Nanaimo Golf Club|0.00|0.00|28.25|2|6.00|12.00|2.00|48.25
-11|Daniel, Matthew|Savage Creek Golf Club|25.00|3.60|0.00|2|8.00|8.00|0.00|44.60
-12|Renfrew, Cory|Pacific Golf Academy (Richmond)|0.00|3.60|23.00|2|8.00|6.00|2.00|42.60
-13|Carson, Zacharia|Nicklaus North Golf Course|0.00|10.00|3.50|3|12.00|12.00|4.00|41.50
-14|McKenzie, Luke|Ledgeview Golf Club|14.50|0.00|1.00|3|12.00|12.00|0.00|39.50
-15|Conlan, Robin|Cordova Bay Golf Club|0.00|2.75|12.25|2|8.00|12.00|4.00|39.00
-15|MacPherson, Clark|Point Grey Golf & Country Club|0.00|10.00|7.00|2|8.00|12.00|2.00|39.00
-17|Morgan, Douglas|Richmond Country Club|14.50|2.00|0.00|4|12.00|10.00|0.00|38.50
-18|Parry, Bryn|Seymour Creek Golf Centre|20.00|0.00|0.00|1|4.00|12.00|0.00|36.00
-19|Aizawa, Mike|Elite Golf Club|0.00|0.00|19.00|2|6.00|10.00|0.00|35.00
-20|Lin, Belinda|Pacific Golf Academy (Richmond)|16.00|2.00|0.00|2|8.00|6.00|2.00|34.00
-21|Barnett, Will|Vancouver Golf Club|0.00|16.00|5.00|3|10.00|2.00|0.00|33.00
-22|Lee, Khan|GreenTee Country Club Langley|0.00|0.00|12.25|1|4.00|12.00|4.00|32.25
-23|Van Hoof, Trevor|Simon Fraser University|6.00|2.00|2.00|3|12.00|12.00|0.00|32.00
-24|Bicknell, Mark|Victoria Golf Club|0.00|4.67|1.00|3|12.00|12.00|2.00|31.67
-25|Choi, Giunue|Capilano Golf & Country Club|0.00|16.00|5.00|2|8.00|0.00|0.00|29.00
-25|Kim, Taylor|Beach Grove Golf Club|25.00|0.00|0.00|1|4.00|0.00|0.00|29.00
-27|Burgeson, Brett|Breaking Par Golf Academy|9.00|0.00|7.67|2|8.00|4.00|0.00|28.67
-27|Tweedy, Todd|Nk'Mip Canyon Desert Golf Course|0.00|0.00|2.67|3|10.00|12.00|4.00|28.67
-29|Lecuyer, Steven|Seymour Creek Golf Centre|0.00|3.60|5.00|2|8.00|10.00|2.00|28.60
-30|Bernakevitch, Lindsay|Victoria Golf Club|0.00|0.00|12.25|3|10.00|6.00|0.00|28.25
-31|McDonald, Brian|Fairview Mountain Golf Club|1.00|0.00|7.00|4|12.00|6.00|2.00|28.00
-32|Schaepper, Gregory|Bowen Island Golf Club|0.00|2.75|1.00|2|8.00|12.00|4.00|27.75
-33|Webber, Alex|Musqueam Golf and Learning Academy|0.00|3.60|2.00|2|8.00|12.00|2.00|27.60
-34|Danish, Ethan|Gallaghers Canyon Golf & Country Club|0.00|2.00|1.00|2|8.00|12.00|4.00|27.00
-34|Dhillon, Chris|Revelstoke Golf Club|0.00|1.00|2.00|4|12.00|10.00|2.00|27.00
-34|Jones, Brad|Vernon Golf & Country Club|0.00|0.00|1.00|3|10.00|12.00|4.00|27.00
-34|Jones, Matthew|Penticton Golf & Country Club|0.00|2.00|5.00|2|8.00|12.00|0.00|27.00
-34|Kidane, Mewail|Pacific Golf Academy (Richmond)|0.00|2.00|1.00|3|12.00|12.00|0.00|27.00
-39|McMurphy, Kyle|Predator Ridge Golf Resort|0.00|2.00|2.67|2|8.00|12.00|2.00|26.67
-40|Kapko, Troy|Vancouver Golf Club|0.00|1.00|1.00|3|12.00|12.00|0.00|26.00
-40|Park, Larry|Seymour Creek Golf Centre|1.00|1.00|1.00|4|12.00|12.00|0.00|26.00
-40|Smith, Keir|Canada Golf Academy|9.00|0.00|1.00|2|8.00|6.00|2.00|26.00
-43|Anderson, Rob|Kelowna Golf & Country Club|3.50|0.00|2.00|3|10.00|8.00|2.00|25.50
-44|Bosquet, Austin|The Rise|0.00|0.00|7.00|2|6.00|12.00|0.00|25.00
-44|Munn, David|Shuswap National|0.00|0.00|1.00|3|10.00|12.00|2.00|25.00
-44|Spooner, Carson|Golden Eagle Golf Club|0.00|2.00|1.00|2|8.00|12.00|2.00|25.00
-44|Tadey, Robert|Fairview Mountain Golf Club|0.00|0.00|1.00|3|10.00|12.00|2.00|25.00
-48|Murray, Adrian|Summerland Golf & Country Club|0.00|2.00|2.67|2|8.00|12.00|0.00|24.67
-49|Akizuki, Shingo|Mayfair Lakes Golf & Country Club|1.00|1.00|1.00|3|12.00|10.00|0.00|24.00
-49|Comerford, Aodan|Shaughnessy Golf & Country Club|0.00|1.00|1.00|3|10.00|12.00|0.00|24.00
-49|Johnston, Shanlee|Point Grey Golf & Country Club|1.00|1.00|1.00|4|12.00|10.00|0.00|24.00
-49|Kennedy, Kat|McCleery Golf Course|20.00|0.00|0.00|1|4.00|0.00|0.00|24.00
-49|Voth, Caleb|Ledgeview Golf Club|0.00|2.00|0.00|3|10.00|12.00|0.00|24.00
-49|Weir, Kate|Bighorn Golf and Country Club|2.00|0.00|0.00|2|8.00|12.00|2.00|24.00
-49|Wong, Christine|Savage Creek Golf Club|8.00|0.00|0.00|1|4.00|10.00|2.00|24.00
-56|Hubert, Alec|Kamloops Golf & Country Club|0.00|0.00|3.50|3|10.00|10.00|0.00|23.50
-57|Smith, Brandon|Gallaghers Canyon Golf & Country Club|0.00|1.25|0.00|3|10.00|12.00|0.00|23.25
-58|Blair, Adam|Vernon Golf & Country Club|0.00|0.00|1.00|3|10.00|12.00|0.00|23.00
-58|Dronov, Sergej|Pacific Golf Academy (Richmond)|0.00|0.00|1.00|2|8.00|12.00|2.00|23.00
-58|Inaba, Kyla|Predator Ridge Golf Resort|13.00|0.00|0.00|1|4.00|6.00|0.00|23.00
-58|Pool, Greg|Vancouver Golf Club|0.00|0.00|1.00|3|10.00|12.00|0.00|23.00
-58|Roszmann, Kyle|McCleery Golf Course|0.00|1.00|2.00|2|8.00|12.00|0.00|23.00
-58|Seol, Don|Canada Golf Academy|0.00|2.00|1.00|2|8.00|12.00|0.00|23.00
-64|Gagnon, Bradley|Pacific Golf Academy (Richmond)|0.00|1.25|1.00|2|8.00|12.00|0.00|22.25
-64|Taylor, Lionel|Monte's Golf Shop|0.00|1.25|1.00|2|8.00|12.00|0.00|22.25
-66|Coulthard, Steven|Talking Rock Golf Course|0.00|0.00|2.00|2|8.00|10.00|2.00|22.00
-66|Kitts, Mark|Shadow Ridge Golf Club|0.00|0.00|2.00|2|6.00|12.00|2.00|22.00
-66|Kristmanson, Alan|Whistler Golf Club|1.00|0.00|1.00|2|8.00|12.00|0.00|22.00
-66|Ollis, Nate|Cordova Bay Golf Club|0.00|0.00|2.00|1|4.00|12.00|4.00|22.00
-70|Bell, Cody|Talking Rock Golf Course|0.00|0.00|1.00|2|8.00|12.00|0.00|21.00
-70|Girardet, Tyson|Victoria Golf Club|0.00|0.00|1.00|2|8.00|12.00|0.00|21.00
-70|Johnson, Myles|Vernon Golf & Country Club|0.00|0.00|1.00|2|8.00|12.00|0.00|21.00
-73|Caan, Michael|Riverway Golf Course|0.00|4.67|0.00|1|4.00|12.00|0.00|20.67
-74|Jackson, Dean|Revelstoke Golf Club|0.00|0.00|0.00|3|8.00|10.00|2.00|20.00
-74|Morey, Geoff|Kamloops Golf & Country Club|0.00|1.00|1.00|3|10.00|8.00|0.00|20.00
-74|Sinnott, Nigel|Cheam Mountain Golf Course|0.00|2.00|0.00|1|4.00|12.00|2.00|20.00
-74|St-Martin, Brody|Shuswap National|0.00|0.00|0.00|2|6.00|12.00|2.00|20.00
-74|Zibrik, Ashley|Shaughnessy Golf & Country Club|3.00|0.00|1.00|4|12.00|4.00|0.00|20.00
-79|Cohen, Maxwell|Eagleview Golf Range|0.00|2.00|7.67|2|8.00|0.00|2.00|19.67
-80|Appel, Christof|The Golf Performance Project|0.00|1.00|0.00|1|4.00|12.00|2.00|19.00
-80|Browning, Dylan|Point Grey Golf & Country Club|0.00|1.00|0.00|2|8.00|10.00|0.00|19.00
-80|Latimer, Russ|Black Mountain Golf Club|0.00|0.00|1.00|2|6.00|10.00|2.00|19.00
-80|Legault, James|Seymour Creek Golf Centre|1.00|0.00|0.00|3|10.00|8.00|0.00|19.00
-80|Martin, Keith|Sunset Ranch Golf & Country Club|0.00|0.00|1.00|2|6.00|10.00|2.00|19.00
-80|McKendrick, Benjamin|Capilano Golf & Country Club|0.00|1.00|2.00|2|8.00|8.00|0.00|19.00
-80|Shepherd, Scott|Princeton Golf Club|0.00|0.00|1.00|2|6.00|10.00|2.00|19.00
-87|Alarie, Lee|Gallaghers Canyon Golf & Country Club|0.00|0.00|0.00|2|6.00|12.00|0.00|18.00
-87|Jamieson, John|Quilchena Golf & Country Club|0.00|2.00|0.00|1|4.00|12.00|0.00|18.00
-87|Jones, Brooks|Vernon Golf & Country Club|0.00|0.00|0.00|2|6.00|12.00|0.00|18.00
-87|Nonni, Lucas|Bear Mountain Golf & Country Club|0.00|0.00|0.00|1|4.00|12.00|2.00|18.00
-87|Palmer, Jeff|Highland Pacific Golf|1.00|0.00|1.00|2|8.00|8.00|0.00|18.00
-87|Vanderpas, Stephanie|Point Grey Golf & Country Club|8.00|0.00|0.00|2|6.00|4.00|0.00|18.00
-87|Watts, Brendan|Balfour Golf Club|0.00|1.00|1.00|2|8.00|8.00|0.00|18.00
-94|Ko, Brycen|Musqueam Golf and Learning Academy|0.00|3.60|2.00|2|8.00|0.00|4.00|17.60
-95|McAdie, Chad|Cheam Mountain Golf Course|3.50|0.00|0.00|1|4.00|10.00|0.00|17.50
-96|Bentley, Andrew|Kamloops Golf & Country Club|0.00|0.00|1.00|3|10.00|6.00|0.00|17.00
-96|Domenichelli, Blair|Bighorn Golf and Country Club|0.00|1.00|0.00|1|4.00|12.00|0.00|17.00
-96|Griffin, Benjamin|Uplands Golf Club|0.00|1.00|0.00|1|4.00|10.00|2.00|17.00
-96|Han, Jimmy|Ace Performance Centre|0.00|1.00|0.00|1|4.00|12.00|0.00|17.00
-96|Henson, Ian|Bighorn Golf and Country Club|1.00|0.00|0.00|2|8.00|8.00|0.00|17.00
-96|Hsu, Pavin|Ultimate Golf Lounge|0.00|1.00|0.00|1|4.00|12.00|0.00|17.00
-96|Ko, Sean|Seymour Creek Golf Centre|0.00|1.00|0.00|1|4.00|12.00|0.00|17.00
-96|Martin, Alex|Gallaghers Canyon Golf & Country Club|0.00|1.00|0.00|1|4.00|12.00|0.00|17.00
-96|McClain, Scott|Copper Point Golf Club|0.00|0.00|1.00|2|6.00|8.00|2.00|17.00
-96|Stugis, Ryan|Groove4Golf|0.00|0.00|1.00|1|4.00|12.00|0.00|17.00
-96|Vu, John|Quilchena Golf & Country Club|0.00|0.00|1.00|1|4.00|12.00|0.00|17.00
-96|Young, Jayme|Arbutus Ridge Golf Club|1.00|0.00|0.00|1|4.00|12.00|0.00|17.00
-108|Kozak, Conner|Okanagan Golf Club|0.00|2.75|0.00|1|4.00|10.00|0.00|16.75
-109|Deleo, Lisa|Fairview Mountain Golf Club|1.00|1.00|0.00|2|8.00|6.00|0.00|16.00
-109|Doherty, Austin|Fairwinds Golf Club|0.00|0.00|0.00|1|4.00|10.00|2.00|16.00
-109|Dyki, Evan|The Golf Performance Project|0.00|0.00|0.00|1|4.00|12.00|0.00|16.00
-109|Keough, Shawn|Marine Drive Golf Club|0.00|2.00|0.00|1|4.00|10.00|0.00|16.00
-109|Locher, Jeremy|The Golf Performance Project|0.00|2.00|0.00|1|4.00|8.00|2.00|16.00
-114|Jackson, Nicholas|Summerland Golf & Country Club|0.00|2.00|1.00|2|8.00|4.00|0.00|15.00
-114|Jurimae, Jason|Kelowna Golf & Country Club|0.00|1.00|0.00|1|4.00|8.00|2.00|15.00
-114|Lindsay, Mark|Nielsen Agencies|1.00|0.00|0.00|1|4.00|10.00|0.00|15.00
-114|McCullough, Lance|Ridge Course At Cordova Bay (The)|1.00|0.00|0.00|1|4.00|10.00|0.00|15.00
-114|Wilson, Chris|Nanaimo Golf Club|1.00|0.00|0.00|4|12.00|0.00|2.00|15.00
-119|Baldwin, Curtis|Tobiano Golf Course|0.00|4.67|2.00|2|8.00|0.00|0.00|14.67
-120|Chernuska, Ryan|St. Eugene Golf Resort and Casino|0.00|0.00|0.00|0|0.00|10.00|4.00|14.00
-120|Dhillon, Darcy|Tobiano Golf Course|0.00|0.00|2.00|1|4.00|6.00|2.00|14.00
-120|Merriam, Scott|Cranbrook Golf Club|0.00|0.00|0.00|1|4.00|8.00|2.00|14.00
-120|Ryujin, Zach|Gorge Vale Golf Club|0.00|0.00|0.00|1|2.00|12.00|0.00|14.00
-120|Schumer, Aidan|Pacific Golf Academy (Richmond)|0.00|0.00|0.00|0|0.00|10.00|4.00|14.00
-120|Siminoff, Jared|Haus of Golf|0.00|0.00|0.00|1|2.00|12.00|0.00|14.00
-120|Valliere, Mark|Glacier Greens Golf Club|0.00|2.00|0.00|2|6.00|6.00|0.00|14.00
-120|Woytowich, David|Kimberley Golf Course|0.00|0.00|0.00|0|0.00|10.00|4.00|14.00
-120|Yonomoto, Kendal|Savage Creek Golf Club|0.00|2.00|0.00|2|8.00|4.00|0.00|14.00
-129|Kao, Ryan|McCleery Golf Course|0.00|0.00|7.67|1|4.00|2.00|0.00|13.67
-130|Hastie, Doug|Royal Colwood Golf Club|1.00|0.00|0.00|1|4.00|8.00|0.00|13.00
-130|Paul-Clark, Kris|Penticton Golf & Country Club|0.00|0.00|1.00|2|6.00|6.00|0.00|13.00
-130|Sullivan, Samuel|Summerland Golf & Country Club|0.00|1.00|0.00|2|6.00|6.00|0.00|13.00
-130|Yan, Anthony|A1 Golf & Performance Center|0.00|1.00|0.00|1|4.00|8.00|0.00|13.00
-130|Zhou, Richard|Unaffiliated|0.00|0.00|1.00|1|4.00|8.00|0.00|13.00
-135|Badger, Tyler|Unaffiliated|0.00|0.00|0.00|0|0.00|12.00|0.00|12.00
-135|Barr, Craig|Meadow Gardens Golf Club|0.00|0.00|0.00|0|0.00|12.00|0.00|12.00
-135|Belle, Mike|Burnaby Mountain Golf Club|0.00|0.00|0.00|0|0.00|12.00|0.00|12.00
-135|Cheyne, Dylan|The Golf Performance Project|0.00|0.00|0.00|0|0.00|12.00|0.00|12.00
-135|Chou, Shu-Yu (Una)|Marine Drive Golf Club|8.00|0.00|0.00|1|4.00|0.00|0.00|12.00
-135|Dillon, Mark|Richmond Country Club|0.00|0.00|0.00|0|0.00|12.00|0.00|12.00
-135|Grice, Aaron|Gorge Vale Golf Club|0.00|0.00|0.00|2|6.00|6.00|0.00|12.00
-135|Han, Wayne(hyunkoo)|Valley Golf Centre|0.00|0.00|0.00|0|0.00|12.00|0.00|12.00
-135|Kirby, Daniel|Cedar Hill Golf Course|0.00|0.00|0.00|0|0.00|12.00|0.00|12.00
-135|Komick, Tyler|Highland Pacific Golf|0.00|0.00|0.00|0|0.00|12.00|0.00|12.00
-135|McLeod, Mac|Royal Colwood Golf Club|0.00|0.00|0.00|0|0.00|12.00|0.00|12.00
-135|Mlikotic, John|Gallaghers Canyon Golf & Country Club|0.00|0.00|0.00|1|4.00|8.00|0.00|12.00
-135|Pearson, Mike|St. Eugene Golf Resort and Casino|0.00|0.00|0.00|1|4.00|6.00|2.00|12.00
-135|Poulsen, Jake|Tobiano Golf Course|0.00|1.00|1.00|2|8.00|2.00|0.00|12.00
-135|Presnail, James|Shadow Ridge Golf Club|0.00|0.00|0.00|0|0.00|12.00|0.00|12.00
-135|Stene, Tyler|Bear Mountain Golf & Country Club|0.00|0.00|0.00|1|4.00|8.00|0.00|12.00
-135|Strong, Mark|PGA of British Columbia|0.00|0.00|0.00|0|0.00|12.00|0.00|12.00
-135|Titterington, Craig|The Redwoods Golf Club|0.00|0.00|0.00|0|0.00|12.00|0.00|12.00
-135|Ward, Chris|Shaughnessy Golf & Country Club|0.00|0.00|0.00|1|4.00|8.00|0.00|12.00
-135|Young, Finlay|Groove4Golf|0.00|0.00|0.00|0|0.00|12.00|0.00|12.00
-155|O'Dell, Connor|Chilliwack Golf Club|0.00|0.00|3.50|2|6.00|0.00|2.00|11.50
-156|Hildebrandt, Joshua|Black Mountain Golf Club|0.00|1.00|0.00|1|4.00|4.00|2.00|11.00
-156|Knight, Michael|Unaffiliated|0.00|2.00|1.00|2|8.00|0.00|0.00|11.00
-156|Rourke, Jordan|Capilano Golf & Country Club|0.00|0.00|1.00|1|4.00|6.00|0.00|11.00
-156|Wammer, Paul|Gallaghers Canyon Golf & Country Club|1.00|0.00|0.00|1|4.00|6.00|0.00|11.00
-160|Armstrong, Bryan|Windermere Valley Golf Course|0.00|0.00|0.00|0|0.00|8.00|2.00|10.00
-160|Atkinson, Clay|Mullin Agency|0.00|0.00|0.00|0|0.00|10.00|0.00|10.00
-160|Bates, Mark|Summit Golf Advisory Inc|0.00|0.00|0.00|0|0.00|10.00|0.00|10.00
-160|Busch, Travis|Fairwinds Golf Club|0.00|0.00|0.00|1|4.00|6.00|0.00|10.00
-160|Chung, Jintae|Lago Golf Academy|1.00|1.00|0.00|2|8.00|0.00|0.00|10.00
-160|Dube, Raymond|Fort Langley Golf Club|1.00|1.00|0.00|2|8.00|0.00|0.00|10.00
-160|Gardner, Cole|Olympic View Golf Club|0.00|0.00|0.00|1|4.00|6.00|0.00|10.00
-160|Giesbrecht, Jason|The Golf Performance Project|0.00|0.00|0.00|1|4.00|6.00|0.00|10.00
-160|Horsthuis, Josh|Summerland Golf & Country Club|0.00|0.00|0.00|0|0.00|8.00|2.00|10.00
-160|Lepine, Tyler|Highland Pacific Golf|0.00|2.00|0.00|1|4.00|4.00|0.00|10.00
-160|Mink, Gordon|Hi-Knoll Golf Centre|1.00|0.00|1.00|2|8.00|0.00|0.00|10.00
-160|Moran, Jamie|Crown Isle Resort & Golf Community|0.00|0.00|0.00|0|0.00|8.00|2.00|10.00
-160|Murphy, Jordan|Unaffiliated|0.00|0.00|0.00|0|0.00|10.00|0.00|10.00
-160|Riley, Axle|Ardmore Golf Course|0.00|0.00|0.00|1|4.00|6.00|0.00|10.00
-160|Simkins, Trevor|Bootleg Gap|0.00|0.00|0.00|0|0.00|8.00|2.00|10.00
-160|Soukoroff, Cindy|St. Eugene Golf Resort and Casino|0.00|0.00|0.00|1|4.00|6.00|0.00|10.00
-176|Anderson, Zachary|Nanaimo Golf Club|0.00|0.00|1.00|1|4.00|2.00|2.00|9.00
-176|Beauchamp, Nate|GOLFTEC South Surrey|0.00|0.00|1.00|2|8.00|0.00|0.00|9.00
-176|Foley, Clint|Marine Drive Golf Club|1.00|0.00|0.00|2|6.00|2.00|0.00|9.00
-176|Gauthier, Jeremy|The Dunes At Kamloops|0.00|1.00|0.00|1|4.00|4.00|0.00|9.00
-176|Goddard, James|Cordova Bay Golf Club|1.00|0.00|0.00|1|4.00|4.00|0.00|9.00
-176|Kastelen, Ashlee|Summerland Golf & Country Club|1.00|0.00|0.00|1|4.00|4.00|0.00|9.00
-176|Kenneford, Peter|Twin Lakes Golf Resort|1.00|0.00|0.00|1|4.00|4.00|0.00|9.00
-176|King, Tim|Pitt Meadows Golf Club|0.00|1.00|0.00|1|4.00|4.00|0.00|9.00
-176|Kolb, Scott|Unaffiliated|1.00|0.00|0.00|1|4.00|4.00|0.00|9.00
-176|Kuss, David|Unaffiliated|1.00|0.00|0.00|1|4.00|4.00|0.00|9.00
-176|Rodgers, Scott|Morgan Creek Golf Course|1.00|0.00|0.00|1|4.00|4.00|0.00|9.00
-176|Schaal, Brian|Copper Point Golf Club|1.00|0.00|0.00|1|4.00|4.00|0.00|9.00
-176|Slonski, Sheldon|Parsons Xtreme Golf (PXG)|0.00|1.00|0.00|1|4.00|4.00|0.00|9.00
-176|Smart, Andrew|Nicklaus North Golf Course|1.00|0.00|0.00|2|8.00|0.00|0.00|9.00
-176|Stubbs, Daryl|Unaffiliated|1.00|0.00|0.00|2|8.00|0.00|0.00|9.00
-191|Baptiste, Victor|Nk'Mip Canyon Desert Golf Course|0.00|0.00|0.00|1|4.00|4.00|0.00|8.00
-191|Boudreau, Eddward|Gorge Vale Golf Club|0.00|0.00|0.00|2|8.00|0.00|0.00|8.00
-191|Curiston, Jamie|Wildstone Golf Course|0.00|0.00|0.00|0|0.00|4.00|4.00|8.00
-191|Hamilton, Blake|Ardmore Golf Course|0.00|0.00|0.00|1|4.00|4.00|0.00|8.00
-191|Johnston, Josh|Gallaghers Canyon Golf & Country Club|0.00|0.00|0.00|0|0.00|8.00|0.00|8.00
-191|Kadin, Jon|Nielsen Agencies|0.00|0.00|0.00|0|0.00|8.00|0.00|8.00
-191|LI, Lincoln|Apex Golf Academy|0.00|0.00|0.00|0|0.00|8.00|0.00|8.00
-191|Naccarato, Louie|Royal Colwood Golf Club|0.00|0.00|0.00|0|0.00|8.00|0.00|8.00
-191|Pateman, Ward|Okanagan Golf Club|0.00|0.00|0.00|1|4.00|4.00|0.00|8.00
-191|Petrie, Doug|Crown Isle Resort & Golf Community|0.00|0.00|0.00|0|0.00|8.00|0.00|8.00
-191|Rampuri, Jaya|GreenTee Country Club Langley|4.00|0.00|0.00|1|4.00|0.00|0.00|8.00
-191|Schneider, Doug|Shadow Mountain Golf Course|0.00|0.00|0.00|0|0.00|8.00|0.00|8.00
-191|Schuster, Joe|Meadow Gardens Golf Club|0.00|0.00|0.00|0|0.00|8.00|0.00|8.00
-191|Shamji, Tahir|Gorge Vale Golf Club|0.00|0.00|0.00|0|0.00|8.00|0.00|8.00
-191|Sheets, Coulton|Fairwinds Golf Club|0.00|0.00|0.00|1|4.00|4.00|0.00|8.00
-191|Simkins, Harold|Unaffiliated|0.00|0.00|0.00|0|0.00|8.00|0.00|8.00
-191|Vanderkooi, Keenan|Victoria Golf Club|0.00|0.00|0.00|0|0.00|8.00|0.00|8.00
-191|Walton, Steven|Olympic View Golf Club|0.00|0.00|0.00|0|0.00|8.00|0.00|8.00
-191|Wright, Adrien|Crown Isle Resort & Golf Community|0.00|0.00|0.00|0|0.00|8.00|0.00|8.00
-210|Craig-Steele, Aiden|Lone Wolf Golf Club|0.00|0.00|3.50|1|4.00|0.00|0.00|7.50
-211|McLean, Trevor|Seymour Golf & Country Club|0.00|1.25|0.00|2|6.00|0.00|0.00|7.25
-212|Doull, Tom|Morgan Creek Golf Course|1.00|0.00|0.00|2|6.00|0.00|0.00|7.00
-212|Dube, Noah|Shaughnessy Golf & Country Club|0.00|1.00|0.00|1|4.00|2.00|0.00|7.00
-212|Jones, Rhiannon|Kelowna Golf & Country Club|1.00|0.00|0.00|2|6.00|0.00|0.00|7.00
-212|Kuntz, Dean|Pitt Meadows Golf Club|1.00|0.00|0.00|1|4.00|0.00|2.00|7.00
-212|Olson, Zach|Chilliwack Golf Club|0.00|0.00|1.00|1|4.00|0.00|2.00|7.00
-212|Roberts, Dominik|Whistler Golf Club|0.00|0.00|1.00|1|4.00|0.00|2.00|7.00
-212|Sveinson, Brayden|Vancouver Golf Club|0.00|1.00|0.00|1|4.00|2.00|0.00|7.00
-219|Simpson, Shayne|Glacier Greens Golf Club|0.00|2.75|0.00|1|4.00|0.00|0.00|6.75
-220|Ashby, Callum|Highland Pacific Golf|0.00|0.00|0.00|2|6.00|0.00|0.00|6.00
-220|Bishop, Kevin|Pheasant Glen Golf Resort|0.00|0.00|0.00|0|0.00|6.00|0.00|6.00
-220|Bourgeois, Dan|Wildstone Golf Course|0.00|0.00|0.00|0|0.00|4.00|2.00|6.00
-220|Burke, Calvin|Marine Drive Golf Club|0.00|0.00|0.00|2|6.00|0.00|0.00|6.00
-220|Butler, Corry|Big Sky Golf & Country Club|0.00|0.00|0.00|2|6.00|0.00|0.00|6.00
-220|Bykowski, Colin|Apex Golf Academy|0.00|0.00|0.00|0|0.00|6.00|0.00|6.00
-220|Callihoo, Chris|Two Eagles Golf Course & Academy|0.00|0.00|0.00|0|0.00|6.00|0.00|6.00
-220|Cullen, Killian|Point Grey Golf & Country Club|0.00|0.00|0.00|0|0.00|6.00|0.00|6.00
-220|Delisle, Helene|Fairwinds Golf Club|0.00|0.00|0.00|1|4.00|2.00|0.00|6.00
-220|Gardler, Nick|Tower Ranch Golf & Country Club|0.00|0.00|0.00|1|4.00|2.00|0.00|6.00
-220|Hopley, Peter|Gallaghers Canyon Golf & Country Club|0.00|0.00|0.00|1|4.00|2.00|0.00|6.00
-220|Hughes, Austin|Elite Golf Club|0.00|0.00|0.00|0|0.00|6.00|0.00|6.00
-220|Ingle, Richard|Victoria Golf Club|0.00|0.00|0.00|1|4.00|2.00|0.00|6.00
-220|Kowalski, Kris|Cultus Lake Golf Club|0.00|2.00|0.00|1|4.00|0.00|0.00|6.00
-220|Kreiner, Graeme|Golden Golf Club|0.00|0.00|0.00|1|2.00|4.00|0.00|6.00
-220|Lamber, Rychel|Aberdeen Glen Golf Club|0.00|2.00|0.00|1|4.00|0.00|0.00|6.00
-220|Liddicoat, Steven|The Redwoods Golf Club|0.00|0.00|0.00|1|4.00|2.00|0.00|6.00
-220|Liddle, Jeff|Shuswap National|0.00|0.00|0.00|0|0.00|6.00|0.00|6.00
-220|Mawer, Tre|Kelowna Golf & Country Club|0.00|0.00|0.00|1|4.00|2.00|0.00|6.00
-220|McKinlay, Jason|Harvest Golf Club|0.00|0.00|0.00|1|4.00|2.00|0.00|6.00
-220|Mcleod, Rio|Unaffiliated|0.00|0.00|0.00|0|0.00|6.00|0.00|6.00
-220|Mulholland, Fraser|Vancouver Golf Tour|2.00|0.00|0.00|1|4.00|0.00|0.00|6.00
-220|Nelson, Aaron|Bootleg Gap|0.00|0.00|0.00|0|0.00|6.00|0.00|6.00
-220|Newsome, Sebastian|Revelstoke Golf Club|0.00|0.00|0.00|1|2.00|4.00|0.00|6.00
-220|O'Keefe, Brian|Shuswap National|0.00|0.00|0.00|0|0.00|6.00|0.00|6.00
-220|Pugliese, Shane|Black Mountain Golf Club|0.00|0.00|0.00|1|2.00|2.00|2.00|6.00
-220|Ranger, Lee|Okanagan Golf Club|0.00|0.00|0.00|2|6.00|0.00|0.00|6.00
-220|Robertson, Tyler|Olympic View Golf Club|0.00|0.00|0.00|0|0.00|6.00|0.00|6.00
-220|Scollon, Drew|University Golf Club|0.00|0.00|0.00|1|4.00|2.00|0.00|6.00
-220|Selk, Chad|Kelowna Golf & Country Club|0.00|0.00|0.00|0|0.00|6.00|0.00|6.00
-220|Slabej, Roman|The Golf Performance Project|0.00|0.00|0.00|0|0.00|6.00|0.00|6.00
-220|Thomsen, Shelley|Unaffiliated|0.00|0.00|0.00|0|0.00|6.00|0.00|6.00
-220|Thorau, Tyler|Olympic View Golf Club|0.00|0.00|0.00|1|4.00|2.00|0.00|6.00
-220|Tofani, Ryan|Ledgeview Golf Club|0.00|0.00|0.00|1|4.00|0.00|2.00|6.00
-220|Wang, Eric|Victoria Academy of Golf|0.00|0.00|0.00|0|0.00|4.00|2.00|6.00
-220|Whittingham, Paul|Cranbrook Golf Club|0.00|0.00|0.00|1|4.00|2.00|0.00|6.00
-220|Wood, Cam|Penticton Golf & Country Club|0.00|0.00|0.00|0|0.00|6.00|0.00|6.00
-220|Woytowich, Gregg|Kimberley Golf Course|0.00|0.00|0.00|0|0.00|6.00|0.00|6.00
-258|Abbenbroek, Roy|Seymour Golf & Country Club|1.00|0.00|0.00|1|4.00|0.00|0.00|5.00
-258|Boyle, Rob|Unaffiliated|1.00|0.00|0.00|1|4.00|0.00|0.00|5.00
-258|Buder, Jeff|University Golf Club|1.00|0.00|0.00|1|4.00|0.00|0.00|5.00
-258|Church, Jessey|Aberdeen Glen Golf Club|0.00|0.00|1.00|1|4.00|0.00|0.00|5.00
-258|Claggett, Dean|Predator Ridge Golf Resort|1.00|0.00|0.00|1|4.00|0.00|0.00|5.00
-258|Claggett, Jessica|Two Eagles Golf Course & Academy|1.00|0.00|0.00|1|4.00|0.00|0.00|5.00
-258|Copeland, Sam|Fairview Mountain Golf Club|1.00|0.00|0.00|1|4.00|0.00|0.00|5.00
-258|Cyr, Lenny|Seymour Golf & Country Club|1.00|0.00|0.00|1|4.00|0.00|0.00|5.00
-258|Dawkins, Tanner|Northview Golf & Country Club|0.00|1.00|0.00|1|4.00|0.00|0.00|5.00
-258|Draper, Cory|Capilano Golf & Country Club|0.00|0.00|1.00|1|4.00|0.00|0.00|5.00
-258|Frank, Randy|Olympic View Golf Club|1.00|0.00|0.00|1|4.00|0.00|0.00|5.00
-258|Grabowski, Michael|Vancouver Golf Club|0.00|1.00|0.00|1|4.00|0.00|0.00|5.00
-258|Hardman, Matt|Sunset Ranch Golf & Country Club|1.00|0.00|0.00|1|4.00|0.00|0.00|5.00
-258|Heath, James|GOLFTEC Coquitlam|1.00|0.00|0.00|1|4.00|0.00|0.00|5.00
-258|Hunt, Ryan|University Golf Club|0.00|0.00|1.00|1|4.00|0.00|0.00|5.00
-258|Kovacs, Eva|Cedar Hill Golf Course|1.00|0.00|0.00|1|4.00|0.00|0.00|5.00
-258|Lam, Bailey|Mayfair Lakes Golf & Country Club|0.00|1.00|0.00|1|4.00|0.00|0.00|5.00
-258|Langthorne, Ryder|Aberdeen Glen Golf Club|0.00|1.00|0.00|1|4.00|0.00|0.00|5.00
-258|Lutz, Derek|Meadows Golf Centre|1.00|0.00|0.00|1|4.00|0.00|0.00|5.00
-258|McDowall, Jeff|Pitt Meadows Golf Club|0.00|1.00|0.00|1|4.00|0.00|0.00|5.00
-258|Miller, Brian|Unaffiliated|1.00|0.00|0.00|1|4.00|0.00|0.00|5.00
-258|O'Dell, Clay|Vancouver Golf Club|0.00|1.00|0.00|1|4.00|0.00|0.00|5.00
-258|Peverley, Tracy|Hazelmere Country Club|1.00|0.00|0.00|1|4.00|0.00|0.00|5.00
-258|Pringle, James|Sunshine Coast Golf & Country Club|1.00|0.00|0.00|1|4.00|0.00|0.00|5.00
-258|Schienbein, Dale|Seymour Golf & Country Club|1.00|0.00|0.00|1|4.00|0.00|0.00|5.00
-258|Shukla, Sunil|Vancouver Golf Club|0.00|1.00|0.00|1|4.00|0.00|0.00|5.00
-258|Smith, Randall|Seymour Golf & Country Club|1.00|0.00|0.00|1|4.00|0.00|0.00|5.00
-258|Thompson, Sean|GOLFTEC North Vancouver|0.00|0.00|1.00|1|4.00|0.00|0.00|5.00
-286|Baufeld, Norman|GOLFTEC Vancouver Terminal Avenue|0.00|0.00|0.00|1|4.00|0.00|0.00|4.00
-286|Bercan, Dylan|Point Grey Golf & Country Club|0.00|0.00|0.00|0|0.00|4.00|0.00|4.00
-286|Brown, Ryan|Myrtle Point Golf Club|0.00|0.00|0.00|1|2.00|0.00|2.00|4.00
-286|Byrne, Will|The Fairmont Chateau Whistler Golf Club|0.00|0.00|0.00|0|0.00|4.00|0.00|4.00
-286|Chen, Kirk|Riverway Golf Course|0.00|0.00|0.00|0|0.00|2.00|2.00|4.00
-286|Chiyasu, Yamato|Squamish Valley Golf Club|0.00|0.00|0.00|1|2.00|2.00|0.00|4.00
-286|Clews, Justin|Uplands Golf Club|0.00|0.00|0.00|1|4.00|0.00|0.00|4.00
-286|Code, Cameron|Kamloops Golf & Country Club|0.00|0.00|0.00|1|4.00|0.00|0.00|4.00
-286|Coe, Brian|Mayfair Lakes Golf & Country Club|0.00|0.00|0.00|1|4.00|0.00|0.00|4.00
-286|Colin, Richard|Vernon Golf & Country Club|0.00|0.00|0.00|0|0.00|4.00|0.00|4.00
-286|Crookall, Nick|Glacier Greens Golf Club|0.00|0.00|0.00|0|0.00|4.00|0.00|4.00
-286|Derrheim, Brent|Beach Grove Golf Club|0.00|0.00|0.00|1|4.00|0.00|0.00|4.00
-286|Dunseith, Spencer|Creston Golf Club|0.00|0.00|0.00|0|0.00|4.00|0.00|4.00
-286|Fletcher, Jordan|Campbell River Golf & Country Club|0.00|0.00|0.00|1|4.00|0.00|0.00|4.00
-286|Fram, Justin|Pheasant Glen Golf Resort|0.00|0.00|0.00|0|0.00|4.00|0.00|4.00
-286|Hayes, Steven|Capilano Golf & Country Club|0.00|0.00|0.00|0|0.00|4.00|0.00|4.00
-286|Hill, Ryan|Royal Colwood Golf Club|0.00|0.00|0.00|0|0.00|4.00|0.00|4.00
-286|Ideson, James|Zone Golf Academy|0.00|0.00|0.00|0|0.00|4.00|0.00|4.00
-286|Jake, Lloy|Unaffiliated|0.00|0.00|0.00|0|0.00|4.00|0.00|4.00
-286|Johnson, Jeff|GOLFTEC South Surrey|0.00|0.00|0.00|1|4.00|0.00|0.00|4.00
-286|Jung, Brian|Brian Jung Golf Academy|0.00|0.00|0.00|1|2.00|2.00|0.00|4.00
-286|Langille, Jeff|Olympic View Golf Club|0.00|0.00|0.00|0|0.00|4.00|0.00|4.00
-286|Law, Rhona|Sunshine Coast Golf & Country Club|0.00|0.00|0.00|1|4.00|0.00|0.00|4.00
-286|MacPherson, Steven|Storey Creek Golf Club|0.00|0.00|0.00|1|4.00|0.00|0.00|4.00
-286|Marko, Trevor|Big Sky Golf & Country Club|0.00|0.00|0.00|1|4.00|0.00|0.00|4.00
-286|McCann, Josh|Unaffiliated|0.00|0.00|0.00|0|0.00|4.00|0.00|4.00
-286|Michell, Winston|Unaffiliated|0.00|0.00|0.00|0|0.00|4.00|0.00|4.00
-286|Mountseven, William|Campbell River Golf & Country Club|0.00|0.00|0.00|1|4.00|0.00|0.00|4.00
-286|Murray, Ryder|Fairview Mountain Golf Club|0.00|0.00|0.00|0|0.00|4.00|0.00|4.00
-286|Nakajima, Shiro|Canadian Sports Business Academy|0.00|0.00|0.00|0|0.00|4.00|0.00|4.00
-286|Ni, Will|GOLFTEC Vancouver Terminal Avenue|0.00|0.00|0.00|1|4.00|0.00|0.00|4.00
-286|O'Rourke, Padraic|Marine Drive Golf Club|0.00|0.00|0.00|1|4.00|0.00|0.00|4.00
-286|Orr, Derek|Iron & Wood Golf Simulators|0.00|0.00|0.00|1|4.00|0.00|0.00|4.00
-286|Palahniuk, Miles|Tower Ranch Golf & Country Club|0.00|0.00|0.00|1|2.00|2.00|0.00|4.00
-286|Pannell, Curtis|Two Eagles Golf Course & Academy|0.00|0.00|0.00|0|0.00|4.00|0.00|4.00
-286|Peters, Bryan|Ledgeview Golf Club|0.00|0.00|0.00|1|4.00|0.00|0.00|4.00
-286|Peverley, Troy|Swan-E-Set Bay Country Club|0.00|0.00|0.00|1|4.00|0.00|0.00|4.00
-286|Qiu, Donald|Tour Development Academy|0.00|0.00|0.00|0|0.00|4.00|0.00|4.00
-286|Ratcliffe, Megan|Storey Creek Golf Club|0.00|0.00|0.00|1|4.00|0.00|0.00|4.00
-286|Robb, Randy|Unaffiliated|0.00|0.00|0.00|0|0.00|2.00|2.00|4.00
-286|Rodda, Jordan|Beach Grove Golf Club|0.00|0.00|0.00|1|4.00|0.00|0.00|4.00
-286|Stone, Ian|Uplands Golf Club|0.00|0.00|0.00|1|4.00|0.00|0.00|4.00
-286|Svejkovsky, Casey|Mayfair Lakes Golf & Country Club|0.00|0.00|0.00|1|4.00|0.00|0.00|4.00
-286|Sweeney, Jason|Summerland Golf & Country Club|0.00|0.00|0.00|0|0.00|4.00|0.00|4.00
-286|Taguchi, Zachary|Unaffiliated|0.00|0.00|0.00|0|0.00|2.00|2.00|4.00
-286|Thompson, Benjamin|Prime Golf|0.00|0.00|0.00|0|0.00|4.00|0.00|4.00
-286|Vandenbrink, Keith|Vernon Golf & Country Club|0.00|0.00|0.00|0|0.00|4.00|0.00|4.00
-286|Vieira, Bruno|Tsawwassen Springs Golf|0.00|0.00|0.00|1|4.00|0.00|0.00|4.00
-286|Vincent, Matthew|Osoyoos Golf Club|0.00|0.00|0.00|0|0.00|4.00|0.00|4.00
-286|White, Laird|Cedar Hill Golf Course|0.00|0.00|0.00|1|2.00|2.00|0.00|4.00
-286|Widjaja, Andrew|Comox Golf Club|0.00|0.00|0.00|0|0.00|4.00|0.00|4.00
-286|Wilson, Ryner|Nanaimo Golf Club|0.00|0.00|0.00|1|4.00|0.00|0.00|4.00
-338|Aitken, Joel|Kelowna Golf & Country Club|0.00|0.00|0.00|1|2.00|0.00|0.00|2.00
-338|An, Anna|Unaffiliated|0.00|0.00|0.00|0|0.00|0.00|2.00|2.00
-338|Anderson, Simon|Fairwinds Golf Club|0.00|0.00|0.00|0|0.00|2.00|0.00|2.00
-338|Ashworth, Dave|Big Sky Golf & Country Club|0.00|0.00|0.00|1|2.00|0.00|0.00|2.00
-338|Balson, Riley|Rivershore Golf Links|0.00|0.00|0.00|1|2.00|0.00|0.00|2.00
-338|Barnum, Noah|Harvest Golf Club|0.00|0.00|0.00|1|2.00|0.00|0.00|2.00
-338|Bartholomew, Matthew|Westwood Plateau Golf & Country Club|0.00|0.00|0.00|0|0.00|0.00|2.00|2.00
-338|Best, Jeff|Princeton Golf Club|0.00|0.00|0.00|1|2.00|0.00|0.00|2.00
-338|Bloom, Trevor|Sunset Ranch Golf & Country Club|0.00|0.00|0.00|1|2.00|0.00|0.00|2.00
-338|Bowland, Scott|Fairview Mountain Golf Club|0.00|0.00|0.00|1|2.00|0.00|0.00|2.00
-338|Buse, Steve|Tower Ranch Golf & Country Club|0.00|0.00|0.00|1|2.00|0.00|0.00|2.00
-338|Carpenter, Lonnie|Penticton Golf & Country Club|0.00|0.00|0.00|1|2.00|0.00|0.00|2.00
-338|Carriere, Jake|Harvest Golf Club|0.00|0.00|0.00|1|2.00|0.00|0.00|2.00
-338|Chu, Guang Yu (Cory)|Savage Creek Golf Club|0.00|0.00|0.00|0|0.00|2.00|0.00|2.00
-338|Ciulla, Gavin|Richmond Country Club|0.00|0.00|0.00|1|2.00|0.00|0.00|2.00
-338|Clapp, Brad|Morningstar Golf Club|0.00|0.00|0.00|0|0.00|2.00|0.00|2.00
-338|Cooper, Billy|Revelstoke Golf Club|0.00|0.00|0.00|1|2.00|0.00|0.00|2.00
-338|Cowan, Shiella|Lago Golf Academy|0.00|0.00|0.00|0|0.00|0.00|2.00|2.00
-338|Crowther, Sean|Shaughnessy Golf & Country Club|0.00|0.00|0.00|1|2.00|0.00|0.00|2.00
-338|Devlin, Nic|Golden Golf Club|0.00|0.00|0.00|1|2.00|0.00|0.00|2.00
-338|Doell, Craig|Victoria Golf Club|0.00|0.00|0.00|1|2.00|0.00|0.00|2.00
-338|Doka, Wes|Pitt Meadows Golf Club|0.00|0.00|0.00|0|0.00|0.00|2.00|2.00
-338|Dollevoet, Grant|Black Mountain Golf Club|0.00|0.00|0.00|1|2.00|0.00|0.00|2.00
-338|Dow, Guy|Penticton Golf & Country Club|0.00|0.00|0.00|0|0.00|2.00|0.00|2.00
-338|Dyer, Cameron|Black Mountain Golf Club|0.00|0.00|0.00|0|0.00|2.00|0.00|2.00
-338|Elliott, Jeff|Glacier Greens Golf Club|0.00|0.00|0.00|1|2.00|0.00|0.00|2.00
-338|Endacott, Dan|Beach Grove Golf Club|0.00|0.00|0.00|1|2.00|0.00|0.00|2.00
-338|Eriksen, Brayden|TaylorMade Golf Canada|0.00|0.00|0.00|0|0.00|2.00|0.00|2.00
-338|Ferrario, Adrianno|Black Mountain Golf Club|0.00|0.00|0.00|1|2.00|0.00|0.00|2.00
-338|Feuz, Danny|Golden Golf Club|0.00|0.00|0.00|1|2.00|0.00|0.00|2.00
-338|Fisher, Ryan|Spur Valley Greens|0.00|0.00|0.00|1|2.00|0.00|0.00|2.00
-338|Forbes, Greg|Unaffiliated|0.00|0.00|0.00|0|0.00|2.00|0.00|2.00
-338|Foxcroft, Alex|Point Grey Golf & Country Club|0.00|0.00|0.00|1|2.00|0.00|0.00|2.00
-338|Frost, Cameron|The Redwoods Golf Club|0.00|0.00|0.00|0|0.00|0.00|2.00|2.00
-338|Glavine, Dave|Penticton Golf & Country Club|0.00|0.00|0.00|1|2.00|0.00|0.00|2.00
-338|Guy, Rob|Haus of Golf|0.00|0.00|0.00|1|2.00|0.00|0.00|2.00
-338|Hallborg, Jeff|Titan Golf|0.00|0.00|0.00|1|2.00|0.00|0.00|2.00
-338|Hallborg, Levi|Titan Golf|0.00|0.00|0.00|1|2.00|0.00|0.00|2.00
-338|Hay, Sean|Uplands Golf Club|0.00|0.00|0.00|0|0.00|2.00|0.00|2.00
-338|Henry, Dwayne|Gallaghers Canyon Golf & Country Club|0.00|0.00|0.00|1|2.00|0.00|0.00|2.00
-338|Hodder, Andrew|Kamloops Golf & Country Club|0.00|0.00|0.00|1|2.00|0.00|0.00|2.00
-338|Hodgson, Kat|Unaffiliated|0.00|0.00|0.00|0|0.00|2.00|0.00|2.00
-338|Holley, Ryan|Ryan Holley Golf|0.00|0.00|0.00|0|0.00|2.00|0.00|2.00
-338|Ingram, Bryce|The Springs at Radium|0.00|0.00|0.00|0|0.00|2.00|0.00|2.00
-338|Isarasakdi, Poontra|Highland Pacific Golf|0.00|0.00|0.00|1|2.00|0.00|0.00|2.00
-338|Jackson, Norman|Cowichan Golf Club|0.00|0.00|0.00|1|2.00|0.00|0.00|2.00
-338|Jacoby, John|Shannon Lake Golf Club|0.00|0.00|0.00|0|0.00|2.00|0.00|2.00
-338|Jang, Andy|Golf Town (Coquitlam)|0.00|0.00|0.00|0|0.00|2.00|0.00|2.00
-338|Johnson, Ellie|Vernon Golf & Country Club|0.00|0.00|0.00|1|2.00|0.00|0.00|2.00
-338|Johnson, Rick|Nk'Mip Canyon Desert Golf Course|0.00|0.00|0.00|1|2.00|0.00|0.00|2.00
-338|Jones, Simon|Kimberley Golf Course|0.00|0.00|0.00|0|0.00|2.00|0.00|2.00
-338|Jungaro, Stephen|Seymour Creek Golf Centre|0.00|0.00|0.00|1|2.00|0.00|0.00|2.00
-338|Kerby, Jimmy|Eagle Ranch Golf Resort|0.00|0.00|0.00|0|0.00|2.00|0.00|2.00
-338|Kim, Joanna|Brian Jung Golf Academy|0.00|0.00|0.00|1|2.00|0.00|0.00|2.00
-338|Kohlen, Dan|Shuswap National|0.00|0.00|0.00|1|2.00|0.00|0.00|2.00
-338|Lavers, Colin|Bowen Island Golf Club|0.00|0.00|0.00|1|2.00|0.00|0.00|2.00
-338|Lee, Kevin|Unaffiliated|0.00|0.00|0.00|0|0.00|2.00|0.00|2.00
-338|Leonhardt, Nathan|Tour Development Academy|0.00|0.00|0.00|0|0.00|2.00|0.00|2.00
-338|Lesiuk, Graysen|Kelowna Golf & Country Club|0.00|0.00|0.00|1|2.00|0.00|0.00|2.00
-338|Lin, Andy|Unaffiliated|0.00|0.00|0.00|0|0.00|2.00|0.00|2.00
-338|Lockerby, Gene|Nanaimo Golf Club|0.00|0.00|0.00|1|2.00|0.00|0.00|2.00
-338|Loewen, Mike|Cottonwood Golf Course|0.00|0.00|0.00|1|2.00|0.00|0.00|2.00
-338|MacAskill, Angus|Unaffiliated|0.00|0.00|0.00|0|0.00|2.00|0.00|2.00
-338|Marker, Marker|Unaffiliated|0.00|0.00|0.00|1|2.00|0.00|0.00|2.00
-338|Martens, Chris|Morgan Creek Golf Course|0.00|0.00|0.00|1|2.00|0.00|0.00|2.00
-338|Martine, Thierry|Fairview Mountain Golf Club|0.00|0.00|0.00|1|2.00|0.00|0.00|2.00
-338|Matoba, Yuki|Canadian Sports Business Academy|0.00|0.00|0.00|0|0.00|2.00|0.00|2.00
-338|Maxwell, Kevin|Gorge Vale Golf Club|0.00|0.00|0.00|0|0.00|2.00|0.00|2.00
-338|McGeady, Shannon|Tobiano Golf Course|0.00|0.00|0.00|0|0.00|0.00|2.00|2.00
-338|McGimpson, Mike|Chilliwack Golf Club|0.00|0.00|0.00|1|2.00|0.00|0.00|2.00
-338|McIlhone, Walt|Shuswap Lake Golf Course|0.00|0.00|0.00|0|0.00|2.00|0.00|2.00
-338|McLeod, Rod|Penticton Golf & Country Club|0.00|0.00|0.00|1|2.00|0.00|0.00|2.00
-338|Minhas, Abhay|Vancouver Golf Club|0.00|0.00|0.00|1|2.00|0.00|0.00|2.00
-338|Monaghan, Tom|McCleery Golf Course|0.00|0.00|0.00|0|0.00|2.00|0.00|2.00
-338|Morin, Scott|Okanagan Golf Club|0.00|0.00|0.00|0|0.00|2.00|0.00|2.00
-338|Nickel, Dylan|Chilliwack Golf Club|0.00|0.00|0.00|0|0.00|0.00|2.00|2.00
-338|Oates, Kevin|Rivershore Golf Links|0.00|0.00|0.00|1|2.00|0.00|0.00|2.00
-338|Panasuk, Kyle|Kamloops Golf & Country Club|0.00|0.00|0.00|1|2.00|0.00|0.00|2.00
-338|Parsons, Casey|Cowichan Golf Club|0.00|0.00|0.00|1|2.00|0.00|0.00|2.00
-338|Pederson, Kevin|Okanagan Golf Club|0.00|0.00|0.00|1|2.00|0.00|0.00|2.00
-338|Perry, Jenn|Unaffiliated|0.00|0.00|0.00|0|0.00|2.00|0.00|2.00
-338|Petreny, Mike|Unaffiliated|0.00|0.00|0.00|0|0.00|2.00|0.00|2.00
-338|Rajotte, Maurice|Black Mountain Golf Club|0.00|0.00|0.00|0|0.00|0.00|2.00|2.00
-338|Ranger, Dustin|Skeena Valley Golf & Country Club|0.00|0.00|0.00|0|0.00|0.00|2.00|2.00
-338|Riel, Keith|Squamish Indoor Golf|0.00|0.00|0.00|1|2.00|0.00|0.00|2.00
-338|Roope, Tyler|Morningstar Golf Club|0.00|0.00|0.00|0|0.00|2.00|0.00|2.00
-338|Ross, Mike|Copper Point Golf Club|0.00|0.00|0.00|1|2.00|0.00|0.00|2.00
-338|Sauer, Steve|Summerland Golf & Country Club|0.00|0.00|0.00|0|0.00|2.00|0.00|2.00
-338|Scott, Cam|Cottonwood Golf Course|0.00|0.00|0.00|1|2.00|0.00|0.00|2.00
-338|Scott, Chad|The Rise|0.00|0.00|0.00|0|0.00|2.00|0.00|2.00
-338|Scutt, Gord|Royal Colwood Golf Club|0.00|0.00|0.00|1|2.00|0.00|0.00|2.00
-338|Senft, Derek|Royal Colwood Golf Club|0.00|0.00|0.00|0|0.00|2.00|0.00|2.00
-338|Sillem, Gabe|Copper Point Golf Club|0.00|0.00|0.00|0|0.00|2.00|0.00|2.00
-338|Simpson, Jordan|The Rise|0.00|0.00|0.00|1|2.00|0.00|0.00|2.00
-338|Stashuk, Jeff|Shuswap National|0.00|0.00|0.00|1|2.00|0.00|0.00|2.00
-338|Stead, Brady|Ledgeview Golf Club|0.00|0.00|0.00|0|0.00|2.00|0.00|2.00
-338|Takenaka, Randy|Shadow Ridge Golf Club|0.00|0.00|0.00|1|2.00|0.00|0.00|2.00
-338|Thorne, Jerome|Unaffiliated|0.00|0.00|0.00|0|0.00|2.00|0.00|2.00
-338|Thoroughgood, Nolan|Royal Colwood Golf Club|0.00|0.00|0.00|1|2.00|0.00|0.00|2.00
-338|Turgeon, Sebastien|Richmond Country Club|0.00|0.00|0.00|1|2.00|0.00|0.00|2.00
-338|Vest, Ryan|Vernon Golf & Country Club|0.00|0.00|0.00|1|2.00|0.00|0.00|2.00
-338|Vogel, Tony|Unaffiliated|0.00|0.00|0.00|0|0.00|0.00|2.00|2.00
-338|Wengi, Scott|Squamish Valley Golf Club|0.00|0.00|0.00|1|2.00|0.00|0.00|2.00
-338|Wilkinson, Craig|Balfour Golf Club|0.00|0.00|0.00|0|0.00|0.00|2.00|2.00
-338|Wilson, Brent|Gorge Vale Golf Club|0.00|0.00|0.00|1|2.00|0.00|0.00|2.00
-338|Wilson, Cory|Squamish Valley Golf Club|0.00|0.00|0.00|1|2.00|0.00|0.00|2.00`;
+const DATA = `1|Stinson, Kevin|Cheam Mountain Golf Course|0.00|0.00|50.00|35.00|2|8.00|12.00|18.00|4.00|127.00
+2|Swan, James|Olympic View Golf Club|0.00|20.00|28.25|0.00|2|8.00|10.00|8.00|4.00|78.25
+3|Towill, Justin|Harvest Golf Club|0.00|0.00|28.25|0.00|3|12.00|12.00|16.00|2.00|70.25
+4|Bogdan, Luke|Ace Performance Centre|0.00|0.00|28.25|0.00|2|8.00|12.00|16.00|4.00|68.25
+5|Shin, John|Northview Golf & Country Club|0.00|10.00|19.00|0.00|3|12.00|12.00|14.00|0.00|67.00
+6|Kitts, Mark|Shadow Ridge Golf Club|0.00|0.00|2.00|19.00|3|10.00|12.00|18.00|4.00|65.00
+7|Goodfellow, Aidan|Nanaimo Golf Club|0.00|0.00|28.25|0.00|3|10.00|12.00|12.00|2.00|64.25
+8|Kennedy, Nicklaus|Talking Rock Golf Course|0.00|16.00|19.00|0.00|3|12.00|12.00|0.00|4.00|63.00
+9|Kallis, Carson|Burnaby Mountain Golf Club|0.00|35.00|1.00|0.00|2|8.00|12.00|4.00|2.00|62.00
+10|Zibrik, Dave|Point Grey Golf & Country Club|0.00|0.00|40.00|0.00|3|10.00|6.00|0.00|2.00|58.00
+11|Irwin, Jordan|Saratoga Beach Golf Course|0.00|25.00|12.25|0.00|2|8.00|10.00|2.00|0.00|57.25
+12|Conlan, Robin|Cordova Bay Golf Club|0.00|2.75|12.25|0.00|3|12.00|12.00|14.00|4.00|57.00
+13|Bicknell, Mark|Victoria Golf Club|0.00|4.67|1.00|0.00|4|12.00|12.00|18.00|2.00|49.67
+14|Munn, David|Shuswap National|0.00|0.00|1.00|19.00|5|12.00|12.00|0.00|4.00|48.00
+15|Bernakevitch, Lindsay|Victoria Golf Club|0.00|0.00|12.25|14.00|4|12.00|6.00|0.00|2.00|46.25
+16|Parry, Bryn|Seymour Creek Golf Centre|20.00|0.00|0.00|0.00|1|4.00|12.00|10.00|0.00|46.00
+17|Daniel, Matthew|Savage Creek Golf Club|25.00|3.60|0.00|0.00|2|8.00|8.00|0.00|0.00|44.60
+18|Lee, Khan|GreenTee Country Club Langley|0.00|0.00|12.25|0.00|1|4.00|12.00|12.00|4.00|44.25
+19|MacPherson, Clark|Point Grey Golf & Country Club|0.00|10.00|7.00|0.00|3|12.00|12.00|0.00|2.00|43.00
+20|Renfrew, Cory|Pacific Golf Academy (Richmond)|0.00|3.60|23.00|0.00|2|8.00|6.00|0.00|2.00|42.60
+21|McKenzie, Luke|Ledgeview Golf Club|14.50|0.00|1.00|2.00|4|12.00|12.00|0.00|2.00|42.50
+22|Carson, Zacharia|Nicklaus North Golf Course|0.00|10.00|3.50|0.00|3|12.00|12.00|0.00|4.00|41.50
+22|Hubert, Alec|Kamloops Golf & Country Club|0.00|0.00|3.50|16.00|5|12.00|10.00|0.00|0.00|41.50
+24|Dronov, Sergej|Pacific Golf Academy (Richmond)|0.00|0.00|1.00|12.00|3|12.00|12.00|0.00|4.00|41.00
+25|Tweedy, Todd|Nk'Mip Canyon Desert Golf Course|0.00|0.00|2.67|2.00|5|12.00|12.00|6.00|6.00|40.67
+26|Martin, Keith|Sunset Ranch Golf & Country Club|0.00|0.00|1.00|4.00|3|10.00|10.00|10.00|4.00|39.00
+27|McMurphy, Kyle|Predator Ridge Golf Resort|0.00|2.00|2.67|0.00|2|8.00|12.00|12.00|2.00|38.67
+28|Morgan, Douglas|Richmond Country Club|14.50|2.00|0.00|0.00|4|12.00|10.00|0.00|0.00|38.50
+29|Ryujin, Zach|Gorge Vale Golf Club|0.00|0.00|0.00|0.00|2|6.00|12.00|20.00|0.00|38.00
+30|Tadey, Robert|Fairview Mountain Golf Club|0.00|0.00|1.00|4.00|4|12.00|12.00|4.00|4.00|37.00
+31|Lecuyer, Steven|Seymour Creek Golf Centre|0.00|3.60|5.00|0.00|2|8.00|10.00|8.00|2.00|36.60
+32|Taylor, Lionel|Monte's Golf Shop|0.00|1.25|1.00|0.00|2|8.00|12.00|14.00|0.00|36.25
+33|Belle, Mike|Burnaby Mountain Golf Club|0.00|0.00|0.00|0.00|1|4.00|12.00|20.00|0.00|36.00
+33|Ollis, Nate|Cordova Bay Golf Club|0.00|0.00|2.00|0.00|2|8.00|12.00|10.00|4.00|36.00
+35|Aizawa, Mike|Elite Golf Club|0.00|0.00|19.00|0.00|2|6.00|10.00|0.00|0.00|35.00
+35|Bosquet, Austin|The Rise|0.00|0.00|7.00|6.00|3|10.00|12.00|0.00|0.00|35.00
+35|O'Rourke, Padraic|Marine Drive Golf Club|0.00|0.00|0.00|25.00|2|8.00|0.00|0.00|2.00|35.00
+38|Lin, Belinda|Pacific Golf Academy (Richmond)|16.00|2.00|0.00|0.00|2|8.00|6.00|0.00|2.00|34.00
+38|Merriam, Scott|Cranbrook Golf Club|0.00|0.00|0.00|0.00|1|4.00|8.00|20.00|2.00|34.00
+40|Webber, Alex|Musqueam Golf and Learning Academy|0.00|3.60|2.00|0.00|2|8.00|12.00|6.00|2.00|33.60
+41|Barnett, Will|Vancouver Golf Club|0.00|16.00|5.00|0.00|3|10.00|2.00|0.00|0.00|33.00
+42|Burgeson, Brett|Breaking Par Golf Academy|9.00|0.00|7.67|6.00|3|12.00|4.00|0.00|0.00|32.67
+43|Kirby, Daniel|Cedar Hill Golf Course|0.00|0.00|0.00|0.00|1|4.00|12.00|16.00|0.00|32.00
+43|McDonald, Brian|Fairview Mountain Golf Club|1.00|0.00|7.00|3.00|5|12.00|6.00|0.00|4.00|32.00
+43|Van Hoof, Trevor|Simon Fraser University|6.00|2.00|2.00|0.00|3|12.00|12.00|0.00|0.00|32.00
+43|Young, Finlay|Groove4Golf|0.00|0.00|0.00|0.00|0|0.00|12.00|20.00|0.00|32.00
+47|Blair, Adam|Vernon Golf & Country Club|0.00|0.00|1.00|2.00|5|12.00|12.00|0.00|2.00|29.00
+47|Choi, Giunue|Capilano Golf & Country Club|0.00|16.00|5.00|0.00|2|8.00|0.00|0.00|0.00|29.00
+47|Coulthard, Steven|Talking Rock Golf Course|0.00|0.00|2.00|1.00|3|12.00|10.00|0.00|4.00|29.00
+47|Danish, Ethan|Gallaghers Canyon Golf & Country Club|0.00|2.00|1.00|0.00|2|8.00|12.00|2.00|4.00|29.00
+47|Johnson, Myles|Vernon Golf & Country Club|0.00|0.00|1.00|0.00|2|8.00|12.00|8.00|0.00|29.00
+47|Jones, Brad|Vernon Golf & Country Club|0.00|0.00|1.00|0.00|4|12.00|12.00|0.00|4.00|29.00
+47|Kim, Taylor|Beach Grove Golf Club|25.00|0.00|0.00|0.00|1|4.00|0.00|0.00|0.00|29.00
+47|Latimer, Russ|Black Mountain Golf Club|0.00|0.00|1.00|6.00|3|10.00|10.00|0.00|2.00|29.00
+47|McClain, Scott|Copper Point Golf Club|0.00|0.00|1.00|6.00|4|12.00|8.00|0.00|2.00|29.00
+47|McCullough, Lance|Ridge Course At Cordova Bay (The)|1.00|0.00|0.00|4.00|3|12.00|10.00|0.00|2.00|29.00
+47|Palmer, Jeff|Highland Pacific Golf|1.00|0.00|1.00|6.00|4|12.00|8.00|0.00|2.00|29.00
+58|Murray, Adrian|Summerland Golf & Country Club|0.00|2.00|2.67|0.00|3|12.00|12.00|0.00|0.00|28.67
+59|Kennedy, Kat|McCleery Golf Course|20.00|0.00|0.00|0.00|2|8.00|0.00|0.00|0.00|28.00
+59|Pool, Greg|Vancouver Golf Club|0.00|0.00|1.00|1.00|4|12.00|12.00|0.00|2.00|28.00
+61|Schaepper, Gregory|Bowen Island Golf Club|0.00|2.75|1.00|0.00|2|8.00|12.00|0.00|4.00|27.75
+62|Anderson, Rob|Kelowna Golf & Country Club|3.50|0.00|2.00|1.50|4|12.00|8.00|0.00|2.00|27.50
+63|Dhillon, Chris|Revelstoke Golf Club|0.00|1.00|2.00|0.00|4|12.00|10.00|0.00|2.00|27.00
+63|Jones, Matthew|Penticton Golf & Country Club|0.00|2.00|5.00|0.00|2|8.00|12.00|0.00|0.00|27.00
+63|Kidane, Mewail|Pacific Golf Academy (Richmond)|0.00|2.00|1.00|0.00|4|12.00|12.00|0.00|0.00|27.00
+63|St-Martin, Brody|Shuswap National|0.00|0.00|0.00|1.00|4|12.00|12.00|0.00|2.00|27.00
+67|Gagnon, Bradley|Pacific Golf Academy (Richmond)|0.00|1.25|1.00|0.00|3|12.00|12.00|0.00|0.00|26.25
+68|Bell, Cody|Talking Rock Golf Course|0.00|0.00|1.00|1.00|4|12.00|12.00|0.00|0.00|26.00
+68|Comerford, Aodan|Shaughnessy Golf & Country Club|0.00|1.00|1.00|0.00|4|12.00|12.00|0.00|0.00|26.00
+68|Kapko, Troy|Vancouver Golf Club|0.00|1.00|1.00|0.00|3|12.00|12.00|0.00|0.00|26.00
+68|Kristmanson, Alan|Whistler Golf Club|1.00|0.00|1.00|1.00|3|12.00|12.00|0.00|0.00|26.00
+68|Park, Larry|Seymour Creek Golf Centre|1.00|1.00|1.00|0.00|5|12.00|12.00|0.00|0.00|26.00
+68|Simkins, Trevor|Bootleg Gap|0.00|0.00|0.00|0.00|0|0.00|8.00|16.00|2.00|26.00
+68|Smith, Keir|Canada Golf Academy|9.00|0.00|1.00|0.00|2|8.00|6.00|0.00|2.00|26.00
+75|Jackson, Dean|Revelstoke Golf Club|0.00|0.00|0.00|1.00|4|12.00|10.00|0.00|2.00|25.00
+75|Jones, Brooks|Vernon Golf & Country Club|0.00|0.00|0.00|1.00|4|12.00|12.00|0.00|0.00|25.00
+75|Shepherd, Scott|Princeton Golf Club|0.00|0.00|1.00|2.00|3|10.00|10.00|0.00|2.00|25.00
+75|Spooner, Carson|Golden Eagle Golf Club|0.00|2.00|1.00|0.00|2|8.00|12.00|0.00|2.00|25.00
+79|Akizuki, Shingo|Mayfair Lakes Golf & Country Club|1.00|1.00|1.00|0.00|3|12.00|10.00|0.00|0.00|24.00
+79|Johnston, Shanlee|Point Grey Golf & Country Club|1.00|1.00|1.00|0.00|5|12.00|10.00|0.00|0.00|24.00
+79|Kreiner, Graeme|Golden Golf Club|0.00|0.00|0.00|0.00|1|2.00|4.00|18.00|0.00|24.00
+79|Voth, Caleb|Ledgeview Golf Club|0.00|2.00|0.00|0.00|3|10.00|12.00|0.00|0.00|24.00
+79|Watts, Brendan|Balfour Golf Club|0.00|1.00|1.00|0.00|2|8.00|8.00|6.00|0.00|24.00
+79|Weir, Kate|Bighorn Golf and Country Club|2.00|0.00|0.00|0.00|2|8.00|12.00|0.00|2.00|24.00
+79|Wong, Christine|Savage Creek Golf Club|8.00|0.00|0.00|0.00|1|4.00|10.00|0.00|2.00|24.00
+86|Alarie, Lee|Gallaghers Canyon Golf & Country Club|0.00|0.00|0.00|1.50|3|10.00|12.00|0.00|0.00|23.50
+87|Smith, Brandon|Gallaghers Canyon Golf & Country Club|0.00|1.25|0.00|0.00|3|10.00|12.00|0.00|0.00|23.25
+88|Appel, Christof|The Golf Performance Project|0.00|1.00|0.00|0.00|1|4.00|12.00|4.00|2.00|23.00
+88|Browning, Dylan|Point Grey Golf & Country Club|0.00|1.00|0.00|0.00|3|12.00|10.00|0.00|0.00|23.00
+88|Inaba, Kyla|Predator Ridge Golf Resort|13.00|0.00|0.00|0.00|1|4.00|6.00|0.00|0.00|23.00
+88|Roszmann, Kyle|McCleery Golf Course|0.00|1.00|2.00|0.00|2|8.00|12.00|0.00|0.00|23.00
+88|Seol, Don|Canada Golf Academy|0.00|2.00|1.00|0.00|2|8.00|12.00|0.00|0.00|23.00
+93|Cheyne, Dylan|The Golf Performance Project|0.00|0.00|0.00|0.00|1|4.00|12.00|6.00|0.00|22.00
+93|Curiston, Jamie|Wildstone Golf Course|0.00|0.00|0.00|0.00|0|0.00|4.00|14.00|4.00|22.00
+93|Nonni, Lucas|Bear Mountain Golf & Country Club|0.00|0.00|0.00|0.00|2|8.00|12.00|0.00|2.00|22.00
+93|Presnail, James|Shadow Ridge Golf Club|0.00|0.00|0.00|4.00|1|4.00|12.00|0.00|2.00|22.00
+93|Stugis, Ryan|Groove4Golf|0.00|0.00|1.00|1.00|2|8.00|12.00|0.00|0.00|22.00
+93|Woytowich, David|Kimberley Golf Course|0.00|0.00|0.00|0.00|0|0.00|10.00|8.00|4.00|22.00
+93|Zibrik, Ashley|Shaughnessy Golf & Country Club|3.00|0.00|1.00|0.00|4|12.00|4.00|0.00|2.00|22.00
+100|Girardet, Tyson|Victoria Golf Club|0.00|0.00|1.00|0.00|2|8.00|12.00|0.00|0.00|21.00
+100|Griffin, Benjamin|Uplands Golf Club|0.00|1.00|0.00|0.00|2|8.00|10.00|0.00|2.00|21.00
+100|Siminoff, Jared|Haus of Golf|0.00|0.00|0.00|1.00|2|6.00|12.00|0.00|2.00|21.00
+100|Young, Jayme|Arbutus Ridge Golf Club|1.00|0.00|0.00|0.00|2|8.00|12.00|0.00|0.00|21.00
+104|Caan, Michael|Riverway Golf Course|0.00|4.67|0.00|0.00|1|4.00|12.00|0.00|0.00|20.67
+105|Doherty, Austin|Fairwinds Golf Club|0.00|0.00|0.00|0.00|2|8.00|10.00|0.00|2.00|20.00
+105|Dyki, Evan|The Golf Performance Project|0.00|0.00|0.00|0.00|2|8.00|12.00|0.00|0.00|20.00
+105|Morey, Geoff|Kamloops Golf & Country Club|0.00|1.00|1.00|0.00|3|10.00|8.00|0.00|0.00|20.00
+105|Schneider, Doug|Shadow Mountain Golf Course|0.00|0.00|0.00|0.00|0|0.00|8.00|12.00|0.00|20.00
+105|Sinnott, Nigel|Cheam Mountain Golf Course|0.00|2.00|0.00|0.00|1|4.00|12.00|0.00|2.00|20.00
+110|Cohen, Maxwell|Eagleview Golf Range|0.00|2.00|7.67|0.00|2|8.00|0.00|0.00|2.00|19.67
+111|Barr, Craig|Meadow Gardens Golf Club|0.00|0.00|0.00|3.00|1|4.00|12.00|0.00|0.00|19.00
+111|Legault, James|Seymour Creek Golf Centre|1.00|0.00|0.00|0.00|3|10.00|8.00|0.00|0.00|19.00
+111|McKendrick, Benjamin|Capilano Golf & Country Club|0.00|1.00|2.00|0.00|2|8.00|8.00|0.00|0.00|19.00
+114|Doka, Wes|Pitt Meadows Golf Club|0.00|0.00|0.00|10.00|1|4.00|0.00|0.00|4.00|18.00
+114|Jamieson, John|Quilchena Golf & Country Club|0.00|2.00|0.00|0.00|1|4.00|12.00|0.00|0.00|18.00
+114|Titterington, Craig|The Redwoods Golf Club|0.00|0.00|0.00|0.00|1|4.00|12.00|2.00|0.00|18.00
+114|Valliere, Mark|Glacier Greens Golf Club|0.00|2.00|0.00|0.00|3|10.00|6.00|0.00|0.00|18.00
+114|Vanderpas, Stephanie|Point Grey Golf & Country Club|8.00|0.00|0.00|0.00|2|6.00|4.00|0.00|0.00|18.00
+114|Wilson, Chris|Nanaimo Golf Club|1.00|0.00|0.00|1.00|5|12.00|0.00|0.00|4.00|18.00
+120|Kao, Ryan|McCleery Golf Course|0.00|0.00|7.67|0.00|2|8.00|2.00|0.00|0.00|17.67
+121|Ko, Brycen|Musqueam Golf and Learning Academy|0.00|3.60|2.00|0.00|2|8.00|0.00|0.00|4.00|17.60
+122|McAdie, Chad|Cheam Mountain Golf Course|3.50|0.00|0.00|0.00|1|4.00|10.00|0.00|0.00|17.50
+123|Bentley, Andrew|Kamloops Golf & Country Club|0.00|0.00|1.00|0.00|3|10.00|6.00|0.00|0.00|17.00
+123|Domenichelli, Blair|Bighorn Golf and Country Club|0.00|1.00|0.00|0.00|1|4.00|12.00|0.00|0.00|17.00
+123|Grice, Aaron|Gorge Vale Golf Club|0.00|0.00|0.00|1.00|3|10.00|6.00|0.00|0.00|17.00
+123|Han, Jimmy|Ace Performance Centre|0.00|1.00|0.00|0.00|1|4.00|12.00|0.00|0.00|17.00
+123|Henson, Ian|Bighorn Golf and Country Club|1.00|0.00|0.00|0.00|2|8.00|8.00|0.00|0.00|17.00
+123|Hsu, Pavin|Ultimate Golf Lounge|0.00|1.00|0.00|0.00|1|4.00|12.00|0.00|0.00|17.00
+123|Ko, Sean|Seymour Creek Golf Centre|0.00|1.00|0.00|0.00|1|4.00|12.00|0.00|0.00|17.00
+123|Martin, Alex|Gallaghers Canyon Golf & Country Club|0.00|1.00|0.00|0.00|1|4.00|12.00|0.00|0.00|17.00
+123|Vu, John|Quilchena Golf & Country Club|0.00|0.00|1.00|0.00|1|4.00|12.00|0.00|0.00|17.00
+132|Kozak, Conner|Okanagan Golf Club|0.00|2.75|0.00|0.00|1|4.00|10.00|0.00|0.00|16.75
+133|Chernuska, Ryan|St. Eugene Golf Resort and Casino|0.00|0.00|0.00|0.00|0|0.00|10.00|2.00|4.00|16.00
+133|Deleo, Lisa|Fairview Mountain Golf Club|1.00|1.00|0.00|0.00|2|8.00|6.00|0.00|0.00|16.00
+133|Keough, Shawn|Marine Drive Golf Club|0.00|2.00|0.00|0.00|1|4.00|10.00|0.00|0.00|16.00
+133|Komick, Tyler|Highland Pacific Golf|0.00|0.00|0.00|0.00|1|4.00|12.00|0.00|0.00|16.00
+133|Locher, Jeremy|The Golf Performance Project|0.00|2.00|0.00|0.00|1|4.00|8.00|0.00|2.00|16.00
+133|Mink, Gordon|Hi-Knoll Golf Centre|1.00|0.00|1.00|1.00|3|12.00|0.00|0.00|2.00|16.00
+133|Stene, Tyler|Bear Mountain Golf & Country Club|0.00|0.00|0.00|0.00|2|8.00|8.00|0.00|0.00|16.00
+140|O'Dell, Connor|Chilliwack Golf Club|0.00|0.00|3.50|0.00|3|10.00|0.00|0.00|2.00|15.50
+141|Jackson, Nicholas|Summerland Golf & Country Club|0.00|2.00|1.00|0.00|2|8.00|4.00|0.00|0.00|15.00
+141|Jurimae, Jason|Kelowna Golf & Country Club|0.00|1.00|0.00|0.00|1|4.00|8.00|0.00|2.00|15.00
+141|Lindsay, Mark|Nielsen Agencies|1.00|0.00|0.00|0.00|1|4.00|10.00|0.00|0.00|15.00
+144|Baldwin, Curtis|Tobiano Golf Course|0.00|4.67|2.00|0.00|2|8.00|0.00|0.00|0.00|14.67
+145|Beauchamp, Nate|GOLFTEC South Surrey|0.00|0.00|1.00|1.00|3|12.00|0.00|0.00|0.00|14.00
+145|Dhillon, Darcy|Tobiano Golf Course|0.00|0.00|2.00|0.00|1|4.00|6.00|0.00|2.00|14.00
+145|Lepine, Tyler|Highland Pacific Golf|0.00|2.00|0.00|0.00|2|8.00|4.00|0.00|0.00|14.00
+145|Murphy, Jordan||0.00|0.00|0.00|0.00|1|4.00|10.00|0.00|0.00|14.00
+145|Riley, Axle|Ardmore Golf Course|0.00|0.00|0.00|0.00|2|8.00|6.00|0.00|0.00|14.00
+145|Schumer, Aidan|Pacific Golf Academy (Richmond)|0.00|0.00|0.00|0.00|0|0.00|10.00|0.00|4.00|14.00
+145|Yonomoto, Kendal|Savage Creek Golf Club|0.00|2.00|0.00|0.00|2|8.00|4.00|0.00|0.00|14.00
+152|Anderson, Zachary|Nanaimo Golf Club|0.00|0.00|1.00|0.00|2|8.00|2.00|0.00|2.00|13.00
+152|Hastie, Doug|Royal Colwood Golf Club|1.00|0.00|0.00|0.00|1|4.00|8.00|0.00|0.00|13.00
+152|Palahniuk, Miles|Tower Ranch Golf & Country Club|0.00|0.00|0.00|3.00|2|6.00|2.00|0.00|2.00|13.00
+152|Paul-Clark, Kris|Penticton Golf & Country Club|0.00|0.00|1.00|0.00|2|6.00|6.00|0.00|0.00|13.00
+152|Rodgers, Scott|Morgan Creek Golf Course|1.00|0.00|0.00|0.00|2|8.00|4.00|0.00|0.00|13.00
+152|Slonski, Sheldon|Parsons Xtreme Golf (PXG)|0.00|1.00|0.00|0.00|2|8.00|4.00|0.00|0.00|13.00
+152|Sullivan, Samuel|Summerland Golf & Country Club|0.00|1.00|0.00|0.00|2|6.00|6.00|0.00|0.00|13.00
+152|Yan, Anthony|A1 Golf & Performance Center|0.00|1.00|0.00|0.00|1|4.00|8.00|0.00|0.00|13.00
+152|Zhou, Richard||0.00|0.00|1.00|0.00|1|4.00|8.00|0.00|0.00|13.00
+161|Badger, Tyler||0.00|0.00|0.00|0.00|0|0.00|12.00|0.00|0.00|12.00
+161|Chou, Shu-Yu (Una)|Marine Drive Golf Club|8.00|0.00|0.00|0.00|1|4.00|0.00|0.00|0.00|12.00
+161|Dillon, Mark|Richmond Country Club|0.00|0.00|0.00|0.00|0|0.00|12.00|0.00|0.00|12.00
+161|Doull, Tom|Morgan Creek Golf Course|1.00|0.00|0.00|1.00|3|10.00|0.00|0.00|0.00|12.00
+161|Han, Wayne(hyunkoo)|Valley Golf Centre|0.00|0.00|0.00|0.00|0|0.00|12.00|0.00|0.00|12.00
+161|McLeod, Mac|Royal Colwood Golf Club|0.00|0.00|0.00|0.00|0|0.00|12.00|0.00|0.00|12.00
+161|Mlikotic, John|Gallaghers Canyon Golf & Country Club|0.00|0.00|0.00|0.00|1|4.00|8.00|0.00|0.00|12.00
+161|Pearson, Mike|St. Eugene Golf Resort and Casino|0.00|0.00|0.00|0.00|1|4.00|6.00|0.00|2.00|12.00
+161|Petrie, Doug|Crown Isle Resort & Golf Community|0.00|0.00|0.00|0.00|1|4.00|8.00|0.00|0.00|12.00
+161|Poulsen, Jake|Tobiano Golf Course|0.00|1.00|1.00|0.00|2|8.00|2.00|0.00|0.00|12.00
+161|Shamji, Tahir|Gorge Vale Golf Club|0.00|0.00|0.00|0.00|1|4.00|8.00|0.00|0.00|12.00
+161|Sheets, Coulton|Fairwinds Golf Club|0.00|0.00|0.00|0.00|2|8.00|4.00|0.00|0.00|12.00
+161|Strong, Mark|PGA of British Columbia|0.00|0.00|0.00|0.00|0|0.00|12.00|0.00|0.00|12.00
+161|Thorne, Jerome||0.00|0.00|0.00|0.00|0|0.00|2.00|10.00|0.00|12.00
+161|Wang, Eric|Victoria Academy of Golf|0.00|0.00|0.00|0.00|1|4.00|4.00|0.00|4.00|12.00
+161|Ward, Chris|Shaughnessy Golf & Country Club|0.00|0.00|0.00|0.00|1|4.00|8.00|0.00|0.00|12.00
+161|Wright, Adrien|Crown Isle Resort & Golf Community|0.00|0.00|0.00|0.00|1|4.00|8.00|0.00|0.00|12.00
+178|Ashby, Callum|Highland Pacific Golf|0.00|0.00|0.00|1.00|3|10.00|0.00|0.00|0.00|11.00
+178|Hildebrandt, Joshua|Black Mountain Golf Club|0.00|1.00|0.00|0.00|1|4.00|4.00|0.00|2.00|11.00
+178|Knight, Michael||0.00|2.00|1.00|0.00|2|8.00|0.00|0.00|0.00|11.00
+178|Olson, Zach|Chilliwack Golf Club|0.00|0.00|1.00|0.00|2|8.00|0.00|0.00|2.00|11.00
+178|Rourke, Jordan|Capilano Golf & Country Club|0.00|0.00|1.00|0.00|1|4.00|6.00|0.00|0.00|11.00
+178|Wammer, Paul|Gallaghers Canyon Golf & Country Club|1.00|0.00|0.00|0.00|1|4.00|6.00|0.00|0.00|11.00
+184|Simpson, Shayne|Glacier Greens Golf Club|0.00|2.75|0.00|0.00|2|8.00|0.00|0.00|0.00|10.75
+185|Armstrong, Bryan|Windermere Valley Golf Course|0.00|0.00|0.00|0.00|0|0.00|8.00|0.00|2.00|10.00
+185|Atkinson, Clay|Mullin Agency|0.00|0.00|0.00|0.00|0|0.00|10.00|0.00|0.00|10.00
+185|Bates, Mark|Summit Golf Advisory Inc|0.00|0.00|0.00|0.00|0|0.00|10.00|0.00|0.00|10.00
+185|Bourgeois, Dan|Wildstone Golf Course|0.00|0.00|0.00|0.00|0|0.00|4.00|4.00|2.00|10.00
+185|Busch, Travis|Fairwinds Golf Club|0.00|0.00|0.00|0.00|1|4.00|6.00|0.00|0.00|10.00
+185|Chung, Jintae|Lago Golf Academy|1.00|1.00|0.00|0.00|2|8.00|0.00|0.00|0.00|10.00
+185|Coe, Brian|Mayfair Lakes Golf & Country Club|0.00|0.00|0.00|2.00|2|8.00|0.00|0.00|0.00|10.00
+185|Cullen, Killian|Point Grey Golf & Country Club|0.00|0.00|0.00|0.00|1|4.00|6.00|0.00|0.00|10.00
+185|Dube, Raymond|Fort Langley Golf Club|1.00|1.00|0.00|0.00|2|8.00|0.00|0.00|0.00|10.00
+185|Gardner, Cole|Olympic View Golf Club|0.00|0.00|0.00|0.00|1|4.00|6.00|0.00|0.00|10.00
+185|Giesbrecht, Jason|The Golf Performance Project|0.00|0.00|0.00|0.00|1|4.00|6.00|0.00|0.00|10.00
+185|Heath, James|GOLFTEC Coquitlam|1.00|0.00|0.00|1.00|2|8.00|0.00|0.00|0.00|10.00
+185|Horsthuis, Josh|Summerland Golf & Country Club|0.00|0.00|0.00|0.00|0|0.00|8.00|0.00|2.00|10.00
+185|Lutz, Derek|Meadows Golf Centre|1.00|0.00|0.00|1.00|2|8.00|0.00|0.00|0.00|10.00
+185|Moran, Jamie|Crown Isle Resort & Golf Community|0.00|0.00|0.00|0.00|0|0.00|8.00|0.00|2.00|10.00
+185|Robertson, Tyler|Olympic View Golf Club|0.00|0.00|0.00|0.00|1|4.00|6.00|0.00|0.00|10.00
+185|Soukoroff, Cindy|St. Eugene Golf Resort and Casino|0.00|0.00|0.00|0.00|1|4.00|6.00|0.00|0.00|10.00
+185|Tofani, Ryan|Ledgeview Golf Club|0.00|0.00|0.00|0.00|2|8.00|0.00|0.00|2.00|10.00
+203|Baufeld, Norman|GOLFTEC Vancouver Terminal Avenue|0.00|0.00|0.00|1.00|2|8.00|0.00|0.00|0.00|9.00
+203|Cyr, Lenny|Seymour Golf & Country Club|1.00|0.00|0.00|0.00|2|8.00|0.00|0.00|0.00|9.00
+203|Foley, Clint|Marine Drive Golf Club|1.00|0.00|0.00|0.00|2|6.00|2.00|0.00|0.00|9.00
+203|Gauthier, Jeremy|The Dunes At Kamloops|0.00|1.00|0.00|0.00|1|4.00|4.00|0.00|0.00|9.00
+203|Goddard, James|Cordova Bay Golf Club|1.00|0.00|0.00|0.00|1|4.00|4.00|0.00|0.00|9.00
+203|Kastelen, Ashlee|Summerland Golf & Country Club|1.00|0.00|0.00|0.00|1|4.00|4.00|0.00|0.00|9.00
+203|Kenneford, Peter|Twin Lakes Golf Resort|1.00|0.00|0.00|0.00|1|4.00|4.00|0.00|0.00|9.00
+203|King, Tim|Pitt Meadows Golf Club|0.00|1.00|0.00|0.00|1|4.00|4.00|0.00|0.00|9.00
+203|Kolb, Scott||1.00|0.00|0.00|0.00|1|4.00|4.00|0.00|0.00|9.00
+203|Kovacs, Eva|Cedar Hill Golf Course|1.00|0.00|0.00|0.00|2|8.00|0.00|0.00|0.00|9.00
+203|Kuss, David||1.00|0.00|0.00|0.00|1|4.00|4.00|0.00|0.00|9.00
+203|Miller, Brian||1.00|0.00|0.00|0.00|2|8.00|0.00|0.00|0.00|9.00
+203|Palsenbarg, Matthew|Clayton Hills Par 3|0.00|0.00|0.00|3.00|1|4.00|0.00|0.00|2.00|9.00
+203|Schaal, Brian|Copper Point Golf Club|1.00|0.00|0.00|0.00|1|4.00|4.00|0.00|0.00|9.00
+203|Smart, Andrew|Nicklaus North Golf Course|1.00|0.00|0.00|0.00|2|8.00|0.00|0.00|0.00|9.00
+203|Stubbs, Daryl||1.00|0.00|0.00|0.00|2|8.00|0.00|0.00|0.00|9.00
+203|Wilkinson, Craig|Balfour Golf Club|0.00|0.00|0.00|3.00|1|4.00|0.00|0.00|2.00|9.00
+220|Baptiste, Victor|Nk'Mip Canyon Desert Golf Course|0.00|0.00|0.00|0.00|1|4.00|4.00|0.00|0.00|8.00
+220|Boudreau, Eddward|Gorge Vale Golf Club|0.00|0.00|0.00|0.00|2|8.00|0.00|0.00|0.00|8.00
+220|Brown, Ryan|Myrtle Point Golf Club|0.00|0.00|0.00|0.00|2|6.00|0.00|0.00|2.00|8.00
+220|Hamilton, Blake|Ardmore Golf Course|0.00|0.00|0.00|0.00|1|4.00|4.00|0.00|0.00|8.00
+220|Hayes, Steven|Capilano Golf & Country Club|0.00|0.00|0.00|0.00|1|4.00|4.00|0.00|0.00|8.00
+220|Johnston, Josh|Gallaghers Canyon Golf & Country Club|0.00|0.00|0.00|0.00|0|0.00|8.00|0.00|0.00|8.00
+220|Kadin, Jon|Nielsen Agencies|0.00|0.00|0.00|0.00|0|0.00|8.00|0.00|0.00|8.00
+220|LI, Lincoln|Apex Golf Academy|0.00|0.00|0.00|0.00|0|0.00|8.00|0.00|0.00|8.00
+220|Liddicoat, Steven|The Redwoods Golf Club|0.00|0.00|0.00|0.00|1|4.00|2.00|0.00|2.00|8.00
+220|Naccarato, Louie|Royal Colwood Golf Club|0.00|0.00|0.00|0.00|0|0.00|8.00|0.00|0.00|8.00
+220|Orr, Derek|Iron & Wood Golf Simulators|0.00|0.00|0.00|0.00|2|8.00|0.00|0.00|0.00|8.00
+220|Pateman, Ward|Okanagan Golf Club|0.00|0.00|0.00|0.00|1|4.00|4.00|0.00|0.00|8.00
+220|Rampuri, Jaya|GreenTee Country Club Langley|4.00|0.00|0.00|0.00|1|4.00|0.00|0.00|0.00|8.00
+220|Schuster, Joe|Meadow Gardens Golf Club|0.00|0.00|0.00|0.00|0|0.00|8.00|0.00|0.00|8.00
+220|Scollon, Drew|University Golf Club|0.00|0.00|0.00|0.00|1|4.00|2.00|0.00|2.00|8.00
+220|Scutt, Gord|Royal Colwood Golf Club|0.00|0.00|0.00|2.00|2|6.00|0.00|0.00|0.00|8.00
+220|Simkins, Harold||0.00|0.00|0.00|0.00|0|0.00|8.00|0.00|0.00|8.00
+220|Vanderkooi, Keenan|Victoria Golf Club|0.00|0.00|0.00|0.00|0|0.00|8.00|0.00|0.00|8.00
+220|Vieira, Bruno|Tsawwassen Springs Golf|0.00|0.00|0.00|0.00|2|8.00|0.00|0.00|0.00|8.00
+220|Walton, Steven|Olympic View Golf Club|0.00|0.00|0.00|0.00|0|0.00|8.00|0.00|0.00|8.00
+240|Craig-Steele, Aiden|Lone Wolf Golf Club|0.00|0.00|3.50|0.00|1|4.00|0.00|0.00|0.00|7.50
+241|McLean, Trevor|Seymour Golf & Country Club|0.00|1.25|0.00|0.00|2|6.00|0.00|0.00|0.00|7.25
+242|Church, Jessey|Aberdeen Glen Golf Club|0.00|0.00|1.00|0.00|1|4.00|0.00|0.00|2.00|7.00
+242|Dube, Noah|Shaughnessy Golf & Country Club|0.00|1.00|0.00|0.00|1|4.00|2.00|0.00|0.00|7.00
+242|Jones, Rhiannon|Kelowna Golf & Country Club|1.00|0.00|0.00|0.00|2|6.00|0.00|0.00|0.00|7.00
+242|Kuntz, Dean|Pitt Meadows Golf Club|1.00|0.00|0.00|0.00|1|4.00|0.00|0.00|2.00|7.00
+242|Roberts, Dominik|Whistler Golf Club|0.00|0.00|1.00|0.00|1|4.00|0.00|0.00|2.00|7.00
+242|Sveinson, Brayden|Vancouver Golf Club|0.00|1.00|0.00|0.00|1|4.00|2.00|0.00|0.00|7.00
+242|Thompson, Sean|GOLFTEC North Vancouver|0.00|0.00|1.00|0.00|1|4.00|0.00|0.00|2.00|7.00
+249|Bishop, Kevin|Pheasant Glen Golf Resort|0.00|0.00|0.00|0.00|0|0.00|6.00|0.00|0.00|6.00
+249|Burke, Calvin|Marine Drive Golf Club|0.00|0.00|0.00|0.00|2|6.00|0.00|0.00|0.00|6.00
+249|Butler, Corry|Big Sky Golf & Country Club|0.00|0.00|0.00|0.00|2|6.00|0.00|0.00|0.00|6.00
+249|Bykowski, Colin|Apex Golf Academy|0.00|0.00|0.00|0.00|0|0.00|6.00|0.00|0.00|6.00
+249|Callihoo, Chris|Two Eagles Golf Course & Academy|0.00|0.00|0.00|0.00|0|0.00|6.00|0.00|0.00|6.00
+249|Clapp, Brad|Morningstar Golf Club|0.00|0.00|0.00|0.00|1|4.00|2.00|0.00|0.00|6.00
+249|Delisle, Helene|Fairwinds Golf Club|0.00|0.00|0.00|0.00|1|4.00|2.00|0.00|0.00|6.00
+249|Gardler, Nick|Tower Ranch Golf & Country Club|0.00|0.00|0.00|0.00|1|4.00|2.00|0.00|0.00|6.00
+249|Hopley, Peter|Gallaghers Canyon Golf & Country Club|0.00|0.00|0.00|0.00|1|4.00|2.00|0.00|0.00|6.00
+249|Hughes, Austin|Elite Golf Club|0.00|0.00|0.00|0.00|0|0.00|6.00|0.00|0.00|6.00
+249|Ingle, Richard|Victoria Golf Club|0.00|0.00|0.00|0.00|1|4.00|2.00|0.00|0.00|6.00
+249|Jung, Brian|Brian Jung Golf Academy|0.00|0.00|0.00|0.00|1|2.00|2.00|0.00|2.00|6.00
+249|Kowalski, Kris|Cultus Lake Golf Club|0.00|2.00|0.00|0.00|1|4.00|0.00|0.00|0.00|6.00
+249|Lamber, Rychel|Aberdeen Glen Golf Club|0.00|2.00|0.00|0.00|1|4.00|0.00|0.00|0.00|6.00
+249|Lavers, Colin|Bowen Island Golf Club|0.00|0.00|0.00|0.00|2|6.00|0.00|0.00|0.00|6.00
+249|Liddle, Jeff|Shuswap National|0.00|0.00|0.00|0.00|0|0.00|6.00|0.00|0.00|6.00
+249|Mawer, Tre|Kelowna Golf & Country Club|0.00|0.00|0.00|0.00|1|4.00|2.00|0.00|0.00|6.00
+249|McKinlay, Jason|Harvest Golf Club|0.00|0.00|0.00|0.00|1|4.00|2.00|0.00|0.00|6.00
+249|Mcleod, Rio||0.00|0.00|0.00|0.00|0|0.00|6.00|0.00|0.00|6.00
+249|Mulholland, Fraser|Vancouver Golf Tour|2.00|0.00|0.00|0.00|1|4.00|0.00|0.00|0.00|6.00
+249|Nelson, Aaron|Bootleg Gap|0.00|0.00|0.00|0.00|0|0.00|6.00|0.00|0.00|6.00
+249|Newsome, Sebastian|Revelstoke Golf Club|0.00|0.00|0.00|0.00|1|2.00|4.00|0.00|0.00|6.00
+249|O'Keefe, Brian|Shuswap National|0.00|0.00|0.00|0.00|0|0.00|6.00|0.00|0.00|6.00
+249|Pugliese, Shane|Black Mountain Golf Club|0.00|0.00|0.00|0.00|1|2.00|2.00|0.00|2.00|6.00
+249|Ranger, Lee|Okanagan Golf Club|0.00|0.00|0.00|0.00|2|6.00|0.00|0.00|0.00|6.00
+249|Selk, Chad|Kelowna Golf & Country Club|0.00|0.00|0.00|0.00|0|0.00|6.00|0.00|0.00|6.00
+249|Slabej, Roman|The Golf Performance Project|0.00|0.00|0.00|0.00|0|0.00|6.00|0.00|0.00|6.00
+249|Thomsen, Shelley||0.00|0.00|0.00|0.00|0|0.00|6.00|0.00|0.00|6.00
+249|Thorau, Tyler|Olympic View Golf Club|0.00|0.00|0.00|0.00|1|4.00|2.00|0.00|0.00|6.00
+249|Whittingham, Paul|Cranbrook Golf Club|0.00|0.00|0.00|0.00|1|4.00|2.00|0.00|0.00|6.00
+249|Wood, Cam|Penticton Golf & Country Club|0.00|0.00|0.00|0.00|0|0.00|6.00|0.00|0.00|6.00
+249|Woytowich, Gregg|Kimberley Golf Course|0.00|0.00|0.00|0.00|0|0.00|6.00|0.00|0.00|6.00
+281|Abbenbroek, Roy|Seymour Golf & Country Club|1.00|0.00|0.00|0.00|1|4.00|0.00|0.00|0.00|5.00
+281|Boyle, Rob||1.00|0.00|0.00|0.00|1|4.00|0.00|0.00|0.00|5.00
+281|Buder, Jeff|University Golf Club|1.00|0.00|0.00|0.00|1|4.00|0.00|0.00|0.00|5.00
+281|Claggett, Dean|Predator Ridge Golf Resort|1.00|0.00|0.00|0.00|1|4.00|0.00|0.00|0.00|5.00
+281|Claggett, Jessica|Two Eagles Golf Course & Academy|1.00|0.00|0.00|0.00|1|4.00|0.00|0.00|0.00|5.00
+281|Copeland, Sam|Fairview Mountain Golf Club|1.00|0.00|0.00|0.00|1|4.00|0.00|0.00|0.00|5.00
+281|Dawkins, Tanner|Northview Golf & Country Club|0.00|1.00|0.00|0.00|1|4.00|0.00|0.00|0.00|5.00
+281|Draper, Cory|Capilano Golf & Country Club|0.00|0.00|1.00|0.00|1|4.00|0.00|0.00|0.00|5.00
+281|Frank, Randy|Olympic View Golf Club|1.00|0.00|0.00|0.00|1|4.00|0.00|0.00|0.00|5.00
+281|Grabowski, Michael|Vancouver Golf Club|0.00|1.00|0.00|0.00|1|4.00|0.00|0.00|0.00|5.00
+281|Hardman, Matt|Sunset Ranch Golf & Country Club|1.00|0.00|0.00|0.00|1|4.00|0.00|0.00|0.00|5.00
+281|Hunt, Ryan|University Golf Club|0.00|0.00|1.00|0.00|1|4.00|0.00|0.00|0.00|5.00
+281|Lam, Bailey|Mayfair Lakes Golf & Country Club|0.00|1.00|0.00|0.00|1|4.00|0.00|0.00|0.00|5.00
+281|Langthorne, Ryder|Aberdeen Glen Golf Club|0.00|1.00|0.00|0.00|1|4.00|0.00|0.00|0.00|5.00
+281|McDowall, Jeff|Pitt Meadows Golf Club|0.00|1.00|0.00|0.00|1|4.00|0.00|0.00|0.00|5.00
+281|O'Dell, Clay|Vancouver Golf Club|0.00|1.00|0.00|0.00|1|4.00|0.00|0.00|0.00|5.00
+281|Peverley, Tracy|Hazelmere Country Club|1.00|0.00|0.00|0.00|1|4.00|0.00|0.00|0.00|5.00
+281|Pringle, James|Sunshine Coast Golf & Country Club|1.00|0.00|0.00|0.00|1|4.00|0.00|0.00|0.00|5.00
+281|Schienbein, Dale|Seymour Golf & Country Club|1.00|0.00|0.00|0.00|1|4.00|0.00|0.00|0.00|5.00
+281|Shukla, Sunil|Vancouver Golf Club|0.00|1.00|0.00|0.00|1|4.00|0.00|0.00|0.00|5.00
+281|Smith, Randall|Seymour Golf & Country Club|1.00|0.00|0.00|0.00|1|4.00|0.00|0.00|0.00|5.00
+281|Thornley, Derek|Fraserview Golf Academy|0.00|0.00|0.00|1.00|1|4.00|0.00|0.00|0.00|5.00
+303|Alexander, Cooper|Highland Pacific Golf|0.00|0.00|0.00|0.00|1|4.00|0.00|0.00|0.00|4.00
+303|Bercan, Dylan|Point Grey Golf & Country Club|0.00|0.00|0.00|0.00|0|0.00|4.00|0.00|0.00|4.00
+303|Brown, Douglas|Cedar Hill Golf Course|0.00|0.00|0.00|0.00|1|4.00|0.00|0.00|0.00|4.00
+303|Byrne, Will|The Fairmont Chateau Whistler Golf Club|0.00|0.00|0.00|0.00|0|0.00|4.00|0.00|0.00|4.00
+303|Cella, Matthew|Apex Golf Academy|0.00|0.00|0.00|0.00|1|4.00|0.00|0.00|0.00|4.00
+303|Chen, Kirk|Riverway Golf Course|0.00|0.00|0.00|0.00|0|0.00|2.00|0.00|2.00|4.00
+303|Chiyasu, Yamato|Squamish Valley Golf Club|0.00|0.00|0.00|0.00|1|2.00|2.00|0.00|0.00|4.00
+303|Clews, Justin|Uplands Golf Club|0.00|0.00|0.00|0.00|1|4.00|0.00|0.00|0.00|4.00
+303|Code, Cameron|Kamloops Golf & Country Club|0.00|0.00|0.00|0.00|1|4.00|0.00|0.00|0.00|4.00
+303|Colin, Richard|Vernon Golf & Country Club|0.00|0.00|0.00|0.00|0|0.00|4.00|0.00|0.00|4.00
+303|Crookall, Nick|Glacier Greens Golf Club|0.00|0.00|0.00|0.00|0|0.00|4.00|0.00|0.00|4.00
+303|Derrheim, Brent|Beach Grove Golf Club|0.00|0.00|0.00|0.00|1|4.00|0.00|0.00|0.00|4.00
+303|Dunseith, Spencer|Creston Golf Club|0.00|0.00|0.00|0.00|0|0.00|4.00|0.00|0.00|4.00
+303|Fletcher, Jordan|Campbell River Golf & Country Club|0.00|0.00|0.00|0.00|1|4.00|0.00|0.00|0.00|4.00
+303|Fram, Justin|Pheasant Glen Golf Resort|0.00|0.00|0.00|0.00|0|0.00|4.00|0.00|0.00|4.00
+303|Hajer, Andrew||0.00|0.00|0.00|0.00|1|4.00|0.00|0.00|0.00|4.00
+303|Hill, Ryan|Royal Colwood Golf Club|0.00|0.00|0.00|0.00|0|0.00|4.00|0.00|0.00|4.00
+303|Howlett, Russell||0.00|0.00|0.00|0.00|1|4.00|0.00|0.00|0.00|4.00
+303|Ideson, James|Zone Golf Academy|0.00|0.00|0.00|0.00|0|0.00|4.00|0.00|0.00|4.00
+303|Jake, Lloy||0.00|0.00|0.00|0.00|0|0.00|4.00|0.00|0.00|4.00
+303|Johnson, Jeff|GOLFTEC South Surrey|0.00|0.00|0.00|0.00|1|4.00|0.00|0.00|0.00|4.00
+303|Kerby, Jimmy|Eagle Ranch Golf Resort|0.00|0.00|0.00|0.00|0|0.00|2.00|0.00|2.00|4.00
+303|Langille, Jeff|Olympic View Golf Club|0.00|0.00|0.00|0.00|0|0.00|4.00|0.00|0.00|4.00
+303|Law, Rhona|Sunshine Coast Golf & Country Club|0.00|0.00|0.00|0.00|1|4.00|0.00|0.00|0.00|4.00
+303|MacPherson, Steven|Storey Creek Golf Club|0.00|0.00|0.00|0.00|1|4.00|0.00|0.00|0.00|4.00
+303|Marko, Trevor|Big Sky Golf & Country Club|0.00|0.00|0.00|0.00|1|4.00|0.00|0.00|0.00|4.00
+303|McCann, Josh||0.00|0.00|0.00|0.00|0|0.00|4.00|0.00|0.00|4.00
+303|Michell, Winston||0.00|0.00|0.00|0.00|0|0.00|4.00|0.00|0.00|4.00
+303|Motomochi, Jonnie|Morgan Creek Golf Course|0.00|0.00|0.00|0.00|1|4.00|0.00|0.00|0.00|4.00
+303|Mountseven, William|Campbell River Golf & Country Club|0.00|0.00|0.00|0.00|1|4.00|0.00|0.00|0.00|4.00
+303|Murray, Ryder|Fairview Mountain Golf Club|0.00|0.00|0.00|0.00|0|0.00|4.00|0.00|0.00|4.00
+303|Nakajima, Shiro|Canadian Sports Business Academy|0.00|0.00|0.00|0.00|0|0.00|4.00|0.00|0.00|4.00
+303|Ni, Will|GOLFTEC Vancouver Terminal Avenue|0.00|0.00|0.00|0.00|1|4.00|0.00|0.00|0.00|4.00
+303|Pannell, Curtis|Two Eagles Golf Course & Academy|0.00|0.00|0.00|0.00|0|0.00|4.00|0.00|0.00|4.00
+303|Peters, Bryan|Ledgeview Golf Club|0.00|0.00|0.00|0.00|1|4.00|0.00|0.00|0.00|4.00
+303|Peverley, Troy|Swan-E-Set Bay Country Club|0.00|0.00|0.00|0.00|1|4.00|0.00|0.00|0.00|4.00
+303|Qiu, Donald|Tour Development Academy|0.00|0.00|0.00|0.00|0|0.00|4.00|0.00|0.00|4.00
+303|Ratcliffe, Megan|Storey Creek Golf Club|0.00|0.00|0.00|0.00|1|4.00|0.00|0.00|0.00|4.00
+303|Robb, Randy||0.00|0.00|0.00|0.00|0|0.00|2.00|0.00|2.00|4.00
+303|Rodda, Jordan|Beach Grove Golf Club|0.00|0.00|0.00|0.00|1|4.00|0.00|0.00|0.00|4.00
+303|Steger, Matthew|Tsawwassen Springs Golf|0.00|0.00|0.00|0.00|1|4.00|0.00|0.00|0.00|4.00
+303|Stone, Ian|Uplands Golf Club|0.00|0.00|0.00|0.00|1|4.00|0.00|0.00|0.00|4.00
+303|Svejkovsky, Casey|Mayfair Lakes Golf & Country Club|0.00|0.00|0.00|0.00|1|4.00|0.00|0.00|0.00|4.00
+303|Sweeney, Jason|Summerland Golf & Country Club|0.00|0.00|0.00|0.00|0|0.00|4.00|0.00|0.00|4.00
+303|Taguchi, Zachary||0.00|0.00|0.00|0.00|0|0.00|2.00|0.00|2.00|4.00
+303|Tang, Sonja|Richmond Country Club|0.00|0.00|0.00|0.00|1|4.00|0.00|0.00|0.00|4.00
+303|Thompson, Benjamin|Prime Golf|0.00|0.00|0.00|0.00|0|0.00|4.00|0.00|0.00|4.00
+303|Vandenbrink, Keith|Vernon Golf & Country Club|0.00|0.00|0.00|0.00|0|0.00|4.00|0.00|0.00|4.00
+303|Vincent, Matthew|Osoyoos Golf Club|0.00|0.00|0.00|0.00|0|0.00|4.00|0.00|0.00|4.00
+303|White, Laird|Cedar Hill Golf Course|0.00|0.00|0.00|0.00|1|2.00|2.00|0.00|0.00|4.00
+303|Widjaja, Andrew|Comox Golf Club|0.00|0.00|0.00|0.00|0|0.00|4.00|0.00|0.00|4.00
+303|Wilson, Ryner|Nanaimo Golf Club|0.00|0.00|0.00|0.00|1|4.00|0.00|0.00|0.00|4.00
+355|Aitken, Joel|Kelowna Golf & Country Club|0.00|0.00|0.00|0.00|1|2.00|0.00|0.00|0.00|2.00
+355|An, Anna||0.00|0.00|0.00|0.00|0|0.00|0.00|0.00|2.00|2.00
+355|Anderson, Simon|Fairwinds Golf Club|0.00|0.00|0.00|0.00|0|0.00|2.00|0.00|0.00|2.00
+355|Ashworth, Dave|Big Sky Golf & Country Club|0.00|0.00|0.00|0.00|1|2.00|0.00|0.00|0.00|2.00
+355|Balson, Riley|Rivershore Golf Links|0.00|0.00|0.00|0.00|1|2.00|0.00|0.00|0.00|2.00
+355|Barnum, Noah|Harvest Golf Club|0.00|0.00|0.00|0.00|1|2.00|0.00|0.00|0.00|2.00
+355|Bartholomew, Matthew|Westwood Plateau Golf & Country Club|0.00|0.00|0.00|0.00|0|0.00|0.00|0.00|2.00|2.00
+355|Best, Jeff|Princeton Golf Club|0.00|0.00|0.00|0.00|1|2.00|0.00|0.00|0.00|2.00
+355|Bloom, Trevor|Sunset Ranch Golf & Country Club|0.00|0.00|0.00|0.00|1|2.00|0.00|0.00|0.00|2.00
+355|Bowland, Scott|Fairview Mountain Golf Club|0.00|0.00|0.00|0.00|1|2.00|0.00|0.00|0.00|2.00
+355|Buse, Steve|Tower Ranch Golf & Country Club|0.00|0.00|0.00|0.00|1|2.00|0.00|0.00|0.00|2.00
+355|Carpenter, Lonnie|Penticton Golf & Country Club|0.00|0.00|0.00|0.00|1|2.00|0.00|0.00|0.00|2.00
+355|Carriere, Jake|Harvest Golf Club|0.00|0.00|0.00|0.00|1|2.00|0.00|0.00|0.00|2.00
+355|Chu, Guang Yu (Cory)|Savage Creek Golf Club|0.00|0.00|0.00|0.00|0|0.00|2.00|0.00|0.00|2.00
+355|Ciulla, Gavin|Richmond Country Club|0.00|0.00|0.00|0.00|1|2.00|0.00|0.00|0.00|2.00
+355|Cooper, Billy|Revelstoke Golf Club|0.00|0.00|0.00|0.00|1|2.00|0.00|0.00|0.00|2.00
+355|Cowan, Shiella|Lago Golf Academy|0.00|0.00|0.00|0.00|0|0.00|0.00|0.00|2.00|2.00
+355|Crowther, Sean|Shaughnessy Golf & Country Club|0.00|0.00|0.00|0.00|1|2.00|0.00|0.00|0.00|2.00
+355|Devlin, Nic|Golden Golf Club|0.00|0.00|0.00|0.00|1|2.00|0.00|0.00|0.00|2.00
+355|Doell, Craig|Victoria Golf Club|0.00|0.00|0.00|0.00|1|2.00|0.00|0.00|0.00|2.00
+355|Dollevoet, Grant|Black Mountain Golf Club|0.00|0.00|0.00|0.00|1|2.00|0.00|0.00|0.00|2.00
+355|Dow, Guy|Penticton Golf & Country Club|0.00|0.00|0.00|0.00|0|0.00|2.00|0.00|0.00|2.00
+355|Dyer, Cameron|Black Mountain Golf Club|0.00|0.00|0.00|0.00|0|0.00|2.00|0.00|0.00|2.00
+355|Elliott, Jeff|Glacier Greens Golf Club|0.00|0.00|0.00|0.00|1|2.00|0.00|0.00|0.00|2.00
+355|Endacott, Dan|Beach Grove Golf Club|0.00|0.00|0.00|0.00|1|2.00|0.00|0.00|0.00|2.00
+355|Eriksen, Brayden|TaylorMade Golf Canada|0.00|0.00|0.00|0.00|0|0.00|2.00|0.00|0.00|2.00
+355|Ferrario, Adrianno|Black Mountain Golf Club|0.00|0.00|0.00|0.00|1|2.00|0.00|0.00|0.00|2.00
+355|Feuz, Danny|Golden Golf Club|0.00|0.00|0.00|0.00|1|2.00|0.00|0.00|0.00|2.00
+355|Fisher, Ryan|Spur Valley Greens|0.00|0.00|0.00|0.00|1|2.00|0.00|0.00|0.00|2.00
+355|Forbes, Greg||0.00|0.00|0.00|0.00|0|0.00|2.00|0.00|0.00|2.00
+355|Foxcroft, Alex|Point Grey Golf & Country Club|0.00|0.00|0.00|0.00|1|2.00|0.00|0.00|0.00|2.00
+355|Frost, Cameron|The Redwoods Golf Club|0.00|0.00|0.00|0.00|0|0.00|0.00|0.00|2.00|2.00
+355|Glavine, Dave|Penticton Golf & Country Club|0.00|0.00|0.00|0.00|1|2.00|0.00|0.00|0.00|2.00
+355|Guy, Rob|Haus of Golf|0.00|0.00|0.00|0.00|1|2.00|0.00|0.00|0.00|2.00
+355|Hallborg, Jeff|Titan Golf|0.00|0.00|0.00|0.00|1|2.00|0.00|0.00|0.00|2.00
+355|Hallborg, Levi|Titan Golf|0.00|0.00|0.00|0.00|1|2.00|0.00|0.00|0.00|2.00
+355|Hay, Sean|Uplands Golf Club|0.00|0.00|0.00|0.00|0|0.00|2.00|0.00|0.00|2.00
+355|Henry, Dwayne|Gallaghers Canyon Golf & Country Club|0.00|0.00|0.00|0.00|1|2.00|0.00|0.00|0.00|2.00
+355|Hodder, Andrew|Kamloops Golf & Country Club|0.00|0.00|0.00|0.00|1|2.00|0.00|0.00|0.00|2.00
+355|Hodgson, Kat||0.00|0.00|0.00|0.00|0|0.00|2.00|0.00|0.00|2.00
+355|Holley, Ryan|Ryan Holley Golf|0.00|0.00|0.00|0.00|0|0.00|2.00|0.00|0.00|2.00
+355|Ingram, Bryce|The Springs at Radium|0.00|0.00|0.00|0.00|0|0.00|2.00|0.00|0.00|2.00
+355|Isarasakdi, Poontra|Highland Pacific Golf|0.00|0.00|0.00|0.00|1|2.00|0.00|0.00|0.00|2.00
+355|Jackson, Norman|Cowichan Golf Club|0.00|0.00|0.00|0.00|1|2.00|0.00|0.00|0.00|2.00
+355|Jacoby, John|Shannon Lake Golf Club|0.00|0.00|0.00|0.00|0|0.00|2.00|0.00|0.00|2.00
+355|Jang, Andy|Golf Town (Coquitlam)|0.00|0.00|0.00|0.00|0|0.00|2.00|0.00|0.00|2.00
+355|Johnson, Ellie|Vernon Golf & Country Club|0.00|0.00|0.00|0.00|1|2.00|0.00|0.00|0.00|2.00
+355|Johnson, Rick|Nk'Mip Canyon Desert Golf Course|0.00|0.00|0.00|0.00|1|2.00|0.00|0.00|0.00|2.00
+355|Jones, Simon|Kimberley Golf Course|0.00|0.00|0.00|0.00|0|0.00|2.00|0.00|0.00|2.00
+355|Jungaro, Stephen|Seymour Creek Golf Centre|0.00|0.00|0.00|0.00|1|2.00|0.00|0.00|0.00|2.00
+355|Kim, Joanna|Brian Jung Golf Academy|0.00|0.00|0.00|0.00|1|2.00|0.00|0.00|0.00|2.00
+355|Kohlen, Dan|Shuswap National|0.00|0.00|0.00|0.00|1|2.00|0.00|0.00|0.00|2.00
+355|Lee, Kevin||0.00|0.00|0.00|0.00|0|0.00|2.00|0.00|0.00|2.00
+355|Leonhardt, Nathan|Tour Development Academy|0.00|0.00|0.00|0.00|0|0.00|2.00|0.00|0.00|2.00
+355|Lesiuk, Graysen|Kelowna Golf & Country Club|0.00|0.00|0.00|0.00|1|2.00|0.00|0.00|0.00|2.00
+355|Lin, Andy||0.00|0.00|0.00|0.00|0|0.00|2.00|0.00|0.00|2.00
+355|Lockerby, Gene|Nanaimo Golf Club|0.00|0.00|0.00|0.00|1|2.00|0.00|0.00|0.00|2.00
+355|Loewen, Mike|Cottonwood Golf Course|0.00|0.00|0.00|0.00|1|2.00|0.00|0.00|0.00|2.00
+355|MacAskill, Angus||0.00|0.00|0.00|0.00|0|0.00|2.00|0.00|0.00|2.00
+355|Marker, Marker||0.00|0.00|0.00|0.00|1|2.00|0.00|0.00|0.00|2.00
+355|Martens, Chris|Morgan Creek Golf Course|0.00|0.00|0.00|0.00|1|2.00|0.00|0.00|0.00|2.00
+355|Martine, Thierry|Fairview Mountain Golf Club|0.00|0.00|0.00|0.00|1|2.00|0.00|0.00|0.00|2.00
+355|Matoba, Yuki|Canadian Sports Business Academy|0.00|0.00|0.00|0.00|0|0.00|2.00|0.00|0.00|2.00
+355|Maxwell, Kevin|Gorge Vale Golf Club|0.00|0.00|0.00|0.00|0|0.00|2.00|0.00|0.00|2.00
+355|McGeady, Shannon|Tobiano Golf Course|0.00|0.00|0.00|0.00|0|0.00|0.00|0.00|2.00|2.00
+355|McGimpson, Mike|Chilliwack Golf Club|0.00|0.00|0.00|0.00|1|2.00|0.00|0.00|0.00|2.00
+355|McIlhone, Walt|Shuswap Lake Golf Course|0.00|0.00|0.00|0.00|0|0.00|2.00|0.00|0.00|2.00
+355|McLeod, Rod|Penticton Golf & Country Club|0.00|0.00|0.00|0.00|1|2.00|0.00|0.00|0.00|2.00
+355|Minhas, Abhay|Vancouver Golf Club|0.00|0.00|0.00|0.00|1|2.00|0.00|0.00|0.00|2.00
+355|Monaghan, Tom|McCleery Golf Course|0.00|0.00|0.00|0.00|0|0.00|2.00|0.00|0.00|2.00
+355|Morin, Scott|Okanagan Golf Club|0.00|0.00|0.00|0.00|0|0.00|2.00|0.00|0.00|2.00
+355|Nickel, Dylan|Chilliwack Golf Club|0.00|0.00|0.00|0.00|0|0.00|0.00|0.00|2.00|2.00
+355|Oates, Kevin|Rivershore Golf Links|0.00|0.00|0.00|0.00|1|2.00|0.00|0.00|0.00|2.00
+355|Panasuk, Kyle|Kamloops Golf & Country Club|0.00|0.00|0.00|0.00|1|2.00|0.00|0.00|0.00|2.00
+355|Parsons, Casey|Cowichan Golf Club|0.00|0.00|0.00|0.00|1|2.00|0.00|0.00|0.00|2.00
+355|Pederson, Kevin|Okanagan Golf Club|0.00|0.00|0.00|0.00|1|2.00|0.00|0.00|0.00|2.00
+355|Perry, Jenn||0.00|0.00|0.00|0.00|0|0.00|2.00|0.00|0.00|2.00
+355|Petreny, Mike||0.00|0.00|0.00|0.00|0|0.00|2.00|0.00|0.00|2.00
+355|Rajotte, Maurice|Black Mountain Golf Club|0.00|0.00|0.00|0.00|0|0.00|0.00|0.00|2.00|2.00
+355|Ranger, Dustin|Skeena Valley Golf & Country Club|0.00|0.00|0.00|0.00|0|0.00|0.00|0.00|2.00|2.00
+355|Riel, Keith|Squamish Indoor Golf|0.00|0.00|0.00|0.00|1|2.00|0.00|0.00|0.00|2.00
+355|Roope, Tyler|Morningstar Golf Club|0.00|0.00|0.00|0.00|0|0.00|2.00|0.00|0.00|2.00
+355|Ross, Mike|Copper Point Golf Club|0.00|0.00|0.00|0.00|1|2.00|0.00|0.00|0.00|2.00
+355|Sauer, Steve|Summerland Golf & Country Club|0.00|0.00|0.00|0.00|0|0.00|2.00|0.00|0.00|2.00
+355|Scott, Cam|Cottonwood Golf Course|0.00|0.00|0.00|0.00|1|2.00|0.00|0.00|0.00|2.00
+355|Scott, Chad|The Rise|0.00|0.00|0.00|0.00|0|0.00|2.00|0.00|0.00|2.00
+355|Senft, Derek|Royal Colwood Golf Club|0.00|0.00|0.00|0.00|0|0.00|2.00|0.00|0.00|2.00
+355|Sillem, Gabe|Copper Point Golf Club|0.00|0.00|0.00|0.00|0|0.00|2.00|0.00|0.00|2.00
+355|Simpson, Jordan|The Rise|0.00|0.00|0.00|0.00|1|2.00|0.00|0.00|0.00|2.00
+355|Stashuk, Jeff|Shuswap National|0.00|0.00|0.00|0.00|1|2.00|0.00|0.00|0.00|2.00
+355|Stead, Brady|Ledgeview Golf Club|0.00|0.00|0.00|0.00|0|0.00|2.00|0.00|0.00|2.00
+355|Takenaka, Randy|Shadow Ridge Golf Club|0.00|0.00|0.00|0.00|1|2.00|0.00|0.00|0.00|2.00
+355|Thoroughgood, Nolan|Royal Colwood Golf Club|0.00|0.00|0.00|0.00|1|2.00|0.00|0.00|0.00|2.00
+355|Turgeon, Sebastien|Richmond Country Club|0.00|0.00|0.00|0.00|1|2.00|0.00|0.00|0.00|2.00
+355|Vest, Ryan|Vernon Golf & Country Club|0.00|0.00|0.00|0.00|1|2.00|0.00|0.00|0.00|2.00
+355|Vogel, Tony||0.00|0.00|0.00|0.00|0|0.00|0.00|0.00|2.00|2.00
+355|Wengi, Scott|Squamish Valley Golf Club|0.00|0.00|0.00|0.00|1|2.00|0.00|0.00|0.00|2.00
+355|Wilson, Brent|Gorge Vale Golf Club|0.00|0.00|0.00|0.00|1|2.00|0.00|0.00|0.00|2.00
+355|Wilson, Cory|Squamish Valley Golf Club|0.00|0.00|0.00|0.00|1|2.00|0.00|0.00|0.00|2.00`;
 
 const rows = DATA.trim().split("\n").map(l => l.split("|"));
 const tbody = document.getElementById("tbody");
@@ -612,8 +624,8 @@ tbody.innerHTML = rows.map(r => {
     <td><span class="rank-chip">${rank}</span></td>
     <td class="left player">${esc(r[1])}</td>
     <td class="left facility">${esc(r[2]) || "—"}</td>
-    <td>${r[3]}</td><td>${r[4]}</td><td>${r[5]}</td><td>${r[6]}</td><td>${r[7]}</td><td>${r[8]}</td><td>${r[9]}</td>
-    <td class="total">${r[10]}</td>
+    <td>${r[3]}</td><td>${r[4]}</td><td>${r[5]}</td><td>${r[6]}</td><td>${r[7]}</td><td>${r[8]}</td><td>${r[9]}</td><td>${r[10]}</td><td>${r[11]}</td>
+    <td class="total">${r[12]}</td>
   </tr>`;
 }).join("");
 
